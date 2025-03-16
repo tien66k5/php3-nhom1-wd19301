@@ -45,7 +45,7 @@
     </div>
 
     <!-- Footer -->
-    {{-- @include('client.layouts.footer') --}}
+    @include('client.layouts.footer')
     <!-- Scripts chung -->
     <script src="{{ asset('client/js/jquery.min.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
