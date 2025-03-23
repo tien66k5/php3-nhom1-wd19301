@@ -1,123 +1,93 @@
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /TOP HEADER -->
 
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="#" class="logo">
-									<img {{ asset('client/img/logo.png') }} alt="">
-								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
+            <!-- HEADER -->
+            <header>
+                <!-- TOP HEADER -->
 
-						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
-									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
-								</form>
-							</div>
-						</div>
-						<!-- /SEARCH BAR -->
+                <!-- /TOP HEADER -->
 
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
+                <!-- MAIN HEADER -->
+                <div id="header">
+                    <!-- container -->
+                    <div class="container">
+                        <!-- row -->
+                        <div class="row">
+                            <!-- LOGO -->
+                            <div class="col-md-3">
+                                <div class="header-logo">
+                                    <a href="/" class="logo">
+                                        <img src="<?= $_ENV['APP_URL'] ?>/public/Assets/Client/img/MaxStore (3) (1).png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /LOGO -->
 
-								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
-									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-                                                    <img src="{{ asset('client/img/product01.png') }}" alt="Sản phẩm 01">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+                            <!-- SEARCH BAR -->
+                            <div class="col-md-6">
+                                <div class="header-search">
+                                    <form>
+                                        <select class="input-select">
+                                            <option value="0">Các danh mục</option>
+                                            {{-- <?php
+                                         
+                                            foreach ($categories as $category) {
+                                                echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
+                                            }
+                                            ?> --}}
+                                        </select>
+                                        <input class="input" placeholder="Tìm kiếm ở đây">
+                                        <button class="search-btn">Tìm kiếm</button>
+                                    </form>
+                                </div>
+                            </div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{ asset('client/img/product2.png') }}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
-								</div>
-								<!-- /Cart -->
+                            <!-- /SEARCH BAR -->
 
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
+                            <!-- ACCOUNT -->
+                            <!-- ACCOUNT -->
+                            <div class="col-md-3 clearfix me-">
+                                <div class="header-ctn">
+                                    <!-- Xây dựng PC -->
+                                    <div>
+                                        <a href="#">
+                                            <i class="fa fa-wrench"></i>
+                                            <span>Xây dựng PC</span>
+                                            <div class="qty">2</div>
+                                        </a>
+                                    </div>
+
+                                    <!-- Tài khoản -->
+                                    <div>
+                                        <a href="<?= isset($_SESSION['user']) ? '/Account' : '/loginForm'; ?>">
+                                            <i class="fa fa-user"></i>
+                                            <span>
+                                                <?= isset($_SESSION['user']) ? $_SESSION['user']['name'] : 'Tài khoản'; ?>
+                                            </span>
+                                        </a>
+                                    </div>
+
+                                    <!-- Giỏ hàng -->
+                                    <div class="dropdown">
+                                        <a href="/cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Giỏ hàng</span>
+                                            <div class="qty">3</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- /ACCOUNT -->
+
+                            <!-- /ACCOUNT -->
+
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- container -->
+                </div>
+                <!-- /MAIN HEADER -->
+            </header>
+            <!-- /HEADER -->
+    </header>

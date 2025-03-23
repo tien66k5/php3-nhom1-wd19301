@@ -12,4 +12,9 @@ class CheckoutController extends Controller
         $data = 'Chào mừng đến trang chủ!';
         return view('client.checkout', compact('data'));
     }
+    public function cart(){
+        $data = 'Chào mừng đến trang chủ!';
+
+        return view('client.cart', compact('data'));
+    }
 }
