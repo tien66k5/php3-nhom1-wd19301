@@ -24,3 +24,4 @@ Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('loginForm.index');
 Route::get('/registerForm', [AuthController::class, 'registerForm'])->name('registerForm.index');
 Route::get('/myAccount', [UserController::class, 'index'])->name('Account.index');
+Route::get('/product/{id}', [ProductController::class, 'detail'])->name('product.detail');
