@@ -44,9 +44,9 @@
 <body>
 
     <!-- Header -->
-    @include('client.layouts.header')
+    @include('livewire.client.layouts.header')
 
-    @include('client.layouts.nav')
+    @include('livewire.client.layouts.nav')
 
     <!-- Nội dung chính -->
     <div class="container">
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Footer -->
-    @include('client.layouts.footer')
+    @include('livewire.client.layouts.footer')
     <!-- Scripts chung -->
     <script src="{{ asset('client/js/jquery.min.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>

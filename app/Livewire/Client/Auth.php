@@ -1,20 +1,20 @@
 <?php
-namespace App\Http\Controllers\Client;
+namespace App\Livewire\Client;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Container\Attributes\Auth;
+use Livewire\Component;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
-class AuthController extends Controller
+class Auth extends Component
 {
 
     public function loginForm()
     {
-        return view('client.login');
+        return view('livewire.client.login');
     }
 
     public function login(Request $request){
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
     public function registerForm()
     {
-        return view('client.register');
+        return view('livewire.client.register');
     }
 
     public function register(Request $request)

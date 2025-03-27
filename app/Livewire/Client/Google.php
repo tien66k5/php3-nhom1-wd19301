@@ -1,15 +1,15 @@
 <?php
+namespace App\Livewire\Client;
 
-namespace App\Http\Controllers\Client;
+use Livewire\Component;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
-class GoogleController extends Controller
+class Google extends Component
 {
     public function redirectToGoogle()
     {

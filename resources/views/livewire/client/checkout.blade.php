@@ -1,4 +1,4 @@
-@extends('client.layouts.app')
+@extends('livewire.client.layouts.app')
 
 @section('title', 'Trang checkout')
 
