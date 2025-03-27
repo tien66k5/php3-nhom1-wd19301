@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->tinyInteger('role')->default(1);
             $table->text('avatar')->nullable();
             $table->string('method', 255)->nullable();
+            $table->string('google_id')->nullable()->after('email');
             $table->timestamps();
         });
 

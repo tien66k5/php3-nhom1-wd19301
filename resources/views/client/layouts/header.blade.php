@@ -1,6 +1,7 @@
 
             <!-- HEADER -->
             <header>
+                
                 <!-- TOP HEADER -->
 
                 <!-- /TOP HEADER -->
@@ -56,15 +57,29 @@
                                     </div>
 
                                     <!-- Tài khoản -->
-                                    <div>
-                                        <a href="<?= isset($_SESSION['user']) ? '/Account' : '/loginForm'; ?>">
+                                    <div class="dropdown">
+                                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa fa-user"></i>
                                             <span>
-                                                <?= isset($_SESSION['user']) ? $_SESSION['user']['name'] : 'Tài khoản'; ?>
+                                                {{ session('user') ? session('user')->name : 'Tài khoản' }}
                                             </span>
                                         </a>
+                                    
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @if(session('user'))
+                                                <li><a class="dropdown-item" href="{{ route('Account.index') }}">Tài khoản của tôi</a></li>
+                                                <li>
+                                                    <form action="{{ route('logout') }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li><a class="dropdown-item" href="{{ route('loginForm.index') }}">Đăng nhập</a></li>
+                                            @endif
+                                        </ul>
                                     </div>
-
+                                    
                                     <!-- Giỏ hàng -->
                                     <div class="dropdown">
                                         <a href="/cart">
