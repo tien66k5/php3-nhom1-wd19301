@@ -1,39 +1,38 @@
 <?php
 
-use App\Http\Controllers\Client\AboutController;
-use App\Http\Controllers\Client\AuthController;
-use App\Http\Controllers\Client\BlankController;
-use App\Http\Controllers\Client\CheckoutController;
-use App\Http\Controllers\Client\ContactController;
-use App\Http\Controllers\Client\GoogleController;
-use App\Http\Controllers\client\HomeController;
-use App\Http\Controllers\Client\ProductController;
-use App\Http\Controllers\Client\StoreController;
-use App\Http\Controllers\Client\UserController;
+use App\Livewire\Client\Home;
+use App\Livewire\Client\Checkout;
+use App\Livewire\Client\Store;
+use App\Livewire\Client\Blank;
+use App\Livewire\Client\Contact;
+use App\Livewire\Client\About;
+use App\Livewire\Client\Auth;
+use App\Livewire\Client\User;
+use App\Livewire\Client\Product;
+use App\Livewire\Client\Google;
 
 
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 session_start(); 
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-Route::get('/cart', [CheckoutController::class, 'cart'])->name('Account.index');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-Route::get('/blank', [BlankController::class, 'index'])->name('blank.index');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::get('/about', [AboutController::class, 'index'])->name('about.index');
-Route::get('/store', [StoreController::class, 'index'])->name('store.index');
-Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('loginForm.index');
-Route::post('/loginForm', [AuthController::class, 'login'])->name('login');
+Route::get('/', [Home::class, 'render'])->name('home.index');
+Route::get('/home', [Home::class, 'render'])->name('home.index');
+Route::get('/cart', [Checkout::class, 'cart'])->name('Account.index');
+Route::get('/checkout', [Checkout::class, 'render'])->name('checkout.index');
+Route::get('/product', [Product::class, 'render'])->name('product.index');
+Route::get('/blank', [Blank::class, 'render'])->name('blank.index');
+Route::get('/contact', [Contact::class, 'render'])->name('contact.index');
+Route::get('/about', [About::class, 'render'])->name('about.index');
+Route::get('/store', [Store::class, 'render'])->name('store.index');
+Route::get('/loginForm', [Auth::class, 'loginForm'])->name('loginForm.index');
+Route::post('/loginForm', [Auth::class, 'login'])->name('login');
 
-Route::get('/registerForm', [AuthController::class, 'registerForm'])->name('registerForm.index');
-Route::post('/registerForm',[AuthController::class, 'register'])->name('register');
+Route::get('/registerForm', [Auth::class, 'registerForm'])->name('registerForm.index');
+Route::post('/registerForm',[Auth::class, 'register'])->name('register');
 
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/myAccount', [UserController::class, 'index'])->name('Account.index');
-Route::get('/product/{id}', [ProductController::class, 'detail'])->name('product.detail');
+
+Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
+Route::post('/logout', [Auth::class, 'logout'])->name('logout');
+Route::get('/myAccount', [User::class, 'render'])->name('Account.index');
