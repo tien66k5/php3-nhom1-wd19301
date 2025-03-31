@@ -21,16 +21,16 @@ return new class extends Migration {
             $table->string('password', 101);
             $table->rememberToken(); // Filament sử dụng
             $table->string('fullname', 255)->nullable();
-            $table->string('firstname', 100);
-            $table->string('lastname', 100);
+            $table->string('firstname', 100)->nullable();
+            $table->string('lastname', 100)->nullable();
             $table->string('reset_token', 64)->nullable();
             $table->dateTime('reset_token_expires')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('role')->default(1);
             $table->text('avatar')->nullable();
             $table->string('method', 255)->nullable();
-            $table->string('google_id')->nullable()->after('email');
-            $table->timestamps();
+            $table->string('google_id')->nullable();
+                        $table->timestamps();
         });
 
         // Bảng password_reset_tokens

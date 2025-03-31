@@ -1,0 +1,7 @@
+php artisan make:filament-resource Tên chức năng 
+
+php artisan make:filament-resource TenResource tạo resource
+
+composer require intervention/image
+
+
