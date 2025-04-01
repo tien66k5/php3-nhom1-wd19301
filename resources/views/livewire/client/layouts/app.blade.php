@@ -26,6 +26,9 @@
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="{{ asset('client/css/font-awesome.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('client/css/MyAccount.css') }}">
+
+    {{-- <link rel="stylesheet" href="{{asset('client/css/bootstrap.min1.css')}}">  --}}
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/style.css') }}" />
 

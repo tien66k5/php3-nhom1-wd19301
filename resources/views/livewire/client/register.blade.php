@@ -63,7 +63,7 @@
         </div>
         
           <div class="pt-1 mb-4">
-          <button class="btn btn-info btn-lg btn-block" type="submit">Đăng Ký</button>
+          <button class="btn btn-info btn-sm btn-block btn-custom" type="submit">Đăng Ký</button>
           </div>
 
           <p>Bạn đã có tài khoản? <a href="/loginForm" class="link-info">Đăng nhập tại đây</a></p>

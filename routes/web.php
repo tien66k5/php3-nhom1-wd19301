@@ -35,7 +35,16 @@ Route::post('/registerForm',[Auth::class, 'register'])->name('register');
 Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
 Route::post('/logout', [Auth::class, 'logout'])->name('logout');
-Route::get('/myAccount', [User::class, 'render'])->name('Account.index');
 
+Route::get('/myAccount', [User::class, 'render'])->name('Account.index');
+<<<<<<< HEAD
+
+=======
+Route::post('/myAccount/edit', [User::class, 'edit'])->name('Account.edit');
+
+Route::get('/error/403', function () {
+    return view('errors');
+})->name('error.403');
+>>>>>>> c620f43 ([HTML CLIENT]Đăng nhập gogle, bắt lỗi role)
 
 

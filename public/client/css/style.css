@@ -96,6 +96,12 @@ ol {
 /*----------------------------*\
 	Buttons
 \*----------------------------*/
+.btn-custom {
+  width: 150px; /* Điều chỉnh chiều rộng */
+  font-size: 12px; /* Giảm kích thước chữ */
+  padding: 8px 12px; /* Giảm padding */
+  margin-top: 15px;
+}
 
 .primary-btn {
   display: inline-block;

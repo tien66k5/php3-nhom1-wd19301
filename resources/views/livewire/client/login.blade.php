@@ -24,26 +24,26 @@
           <div class="form-outline mb-4">
           <label class="form-label">Email</label>
           <input name="email" type="email" class="form-control form-control-lg" placeholder="Nhập email của bạn"
-          value="{{ old('email') }}" />
-             @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+            value="{{ old('email') }}" />
+          @error('email') <span class="text-danger">{{ $message }}</span> @enderror
 
           </div>
 
           <div class="form-outline mb-4">
           <label class="form-label">Mật khẩu</label>
-          <input name="password" type="password" class="form-control form-control-lg" placeholder="Nhập mật khẩu"
-             />
-             @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+          <input name="password" type="password" class="form-control form-control-lg"
+            placeholder="Nhập mật khẩu" />
+          @error('password') <span class="text-danger">{{ $message }}</span> @enderror
           </div>
 
           <div class="pt-1 mb-4">
-          <button class="btn btn-info btn-lg btn-block" type="submit">Đăng Nhập</button>
+          <button class="btn btn-info btn-sm btn-block btn-custom " type="submit">Đăng Nhập</button>
           </div>
           <div class="pt-1 mb-4">
-            <a href="{{ route('auth.google') }}" class="btn btn-danger">
-              <i class="fa fa-google"></i> Đăng nhập với Google
+          <a href="{{ route('auth.google') }}" class="btn btn-block btn-danger btn-sm btn-custom">
+            <i class="fa fa-google"></i> Đăng nhập Google
           </a>
-          
+
           </div>
 
           <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Quên mật khẩu?</a></p>
@@ -69,23 +69,23 @@
 @endsection
 
 @section('scripts')
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
     let inputs = document.querySelectorAll("input");
 
     inputs.forEach(input => {
-        input.addEventListener("input", function () {
-            let errorSpan = this.parentElement.querySelector(".text-danger");
-            if (errorSpan) {
-                if (this.value.trim()) {
-                    errorSpan.style.display = "none";
-                } else {
-                    errorSpan.style.display = "inline";
-                }
-            }
-        });
+      input.addEventListener("input", function () {
+      let errorSpan = this.parentElement.querySelector(".text-danger");
+      if (errorSpan) {
+        if (this.value.trim()) {
+        errorSpan.style.display = "none";
+        } else {
+        errorSpan.style.display = "inline";
+        }
+      }
+      });
     });
-});
+    });
 
-</script>
+  </script>
 @endsection

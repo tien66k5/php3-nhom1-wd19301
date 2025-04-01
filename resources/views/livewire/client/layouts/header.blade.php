@@ -45,40 +45,36 @@
 
                             <!-- ACCOUNT -->
                             <!-- ACCOUNT -->
-                            <div class="col-md-3 clearfix me-">
+                            <div class="col-md-3 clearfix ">
                                 <div class="header-ctn">
                                     <!-- Xây dựng PC -->
-                                    <div>
+                                    {{-- <div>
                                         <a href="#">
                                             <i class="fa fa-wrench"></i>
                                             <span>Xây dựng PC</span>
                                             <div class="qty">2</div>
                                         </a>
-                                    </div>
-
+                                    </div> --}}
+                                    <div class="dropdown">
+                                        <a class="btn" href="/loginForm" role="button">
+                                            <i class="fa fa-sign-in"></i>
+                                            <span>Đăng nhập</span>
+                                        </a>  
+                                    </div> 
                                     <!-- Tài khoản -->
                                     <div class="dropdown">
-                                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="btn" href="/myAccount" role="button" id="dropdownMenuLink" aria-expanded="false">
                                             <i class="fa fa-user"></i>
+                                            
                                             <span>
-                                                {{ session('user') ? session('user')->name : 'Tài khoản' }}
+                                                {{ Auth::check() ? Auth::user()->name : 'Tài khoản' }}
                                             </span>
                                         </a>
-                                    
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            @if(session('user'))
-                                                <li><a class="dropdown-item" href="{{ route('Account.index') }}">Tài khoản của tôi</a></li>
-                                                <li>
-                                                    <form action="{{ route('logout') }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li><a class="dropdown-item" href="{{ route('loginForm.index') }}">Đăng nhập</a></li>
-                                            @endif
-                                        </ul>
+                                                              
+
                                     </div>
+                                    
+                                     
                                     
                                     <!-- Giỏ hàng -->
                                     <div class="dropdown">

@@ -3,11 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Redirect;
+use Filament\Panel;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -24,7 +28,9 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'role',
         'google_id',
+        'avatar',
 
     ];
 
@@ -43,11 +49,21 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+
+     public function canAccessPanel(Panel $panel): bool
+     {
+        if ($this->role !== 2) {
+            Redirect::route('error.403')->send(); 
+        }
+        return true;
+     }
+
+     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
+    } 
+
 }

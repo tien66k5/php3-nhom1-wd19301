@@ -1,4 +1,6 @@
-@section('content')
+
+{{-- @section('content') --}}
+
 <div class="col-lg-3">
     <div class="account-sidebar">
         <div class="account-sidebar-title">
@@ -40,9 +42,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                     </svg>
-
-                    <a href="/logout">Đăng xuất</a>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
                 </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </ul>
 
         </div>
@@ -50,4 +54,4 @@
 
 </div>
 
-@endsection
+{{-- @endsection --}}
