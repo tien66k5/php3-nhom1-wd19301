@@ -11,8 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 255);
             $table->tinyInteger('status')->default(1);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->useCurrentOnUpdate();
+            $table->foreignId('product_id')->nullable()->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

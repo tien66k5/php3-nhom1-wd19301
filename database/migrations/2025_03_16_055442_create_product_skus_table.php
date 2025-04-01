@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('sku', 100)->unique();
             $table->text('images')->nullable();
-            $table->integer('price');
             $table->unsignedInteger('quantity')->default(0);
             $table->unsignedBigInteger('product_id');
             $table->timestamps();

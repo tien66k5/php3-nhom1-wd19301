@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->text('short_description');
             $table->integer('total_quantity')->default(0);
             $table->decimal('discount', 5, 2)->default(0.00);
-            $table->text('thumbnail');
-            $table->text('specifications');
+            $table->json('images')->nullable();
+            $table->text('specifications')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

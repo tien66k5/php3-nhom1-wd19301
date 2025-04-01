@@ -3,13 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrandResource\Pages;
-use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Brand;
 use Filament\Forms;
-use Filament\Forms\Components\Concerns\CanBeSearchable;
-use Filament\Forms\Form;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,48 +23,59 @@ class BrandResource extends Resource
     protected static ?string $model = Brand::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralLabel = 'Thương hiệu';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->label('Tên thương hiệu')
+                    ->required()
+                    ->maxLength(255),
+                FileUpload::make('image')
+                    ->label('Hình ảnh')
+                    ->image()
+                    ->directory('brands'),
+                Select::make('status')
+                    ->label('Trạng thái')
+                    ->options([
+                        1 => 'Hoạt Động',
+                        0 => 'Khóa',
+                    ])
+                    ->default(1),
+                Textarea::make('description')
+                    ->label('Mô tả')
+                    ->rows(3),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->sortable()
-                    ->searchable(),  
-    
-                Tables\Columns\TextColumn::make('name')  
-                    ->label('Tên thương hiệu')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('name')->label('Tên thương hiệu')
+                    ->sortable()->searchable(),
+                ImageColumn::make('image')->label('Hình ảnh')
+                    ->circular(),
+                BooleanColumn::make('status')->label('Trạng thái'),
+                TextColumn::make('description')->label('Mô tả')
+                    ->limit(50),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Sửa'),
+                Tables\Actions\DeleteAction::make()->label('Xóa'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
