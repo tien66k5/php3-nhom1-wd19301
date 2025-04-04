@@ -86,7 +86,7 @@
                             <!-- tab -->
                             <div id="tab1" class="tab-pane active">
                                 <div class="products-slick" data-nav="#slick-nav-1">
-                                    @foreach($products as $product)
+                                    {{-- @foreach($products as $product)
                                                                     <div class="product">
                                                                         <div class="product-img">
                                                                             <img src="{{ asset('uploads/' . $product->thumbnail) }}"
@@ -136,7 +136,7 @@
                                                                                 cart</button>
                                                                         </div>
                                                                     </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                                 <div id="slick-nav-1" class="products-slick-nav"></div>
                             </div>
@@ -229,7 +229,7 @@
                             <!-- tab -->
                             <div id="tab2" class="tab-pane fade in active">
                                 <div class="products-slick" data-nav="#slick-nav-2">
-                                    @foreach($products as $product)
+                                    {{-- @foreach($products as $product)
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
@@ -271,7 +271,7 @@
                                             </div>
                                         </div>
                                         <!-- /product -->
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                                 <div id="slick-nav-2" class="products-slick-nav"></div>
                             </div>
