@@ -18,6 +18,7 @@
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/slick.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/slick-theme.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('client/css/MyAccount.css') }}" />
 
     <!-- nouislider -->
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/nouislider.min.css') }}" />

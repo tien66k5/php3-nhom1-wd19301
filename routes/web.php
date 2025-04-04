@@ -24,7 +24,7 @@ Route::get('/product', [Product::class, 'render'])->name('product.index');
 Route::get('/blank', [Blank::class, 'render'])->name('blank.index');
 Route::get('/contact', [Contact::class, 'render'])->name('contact.index');
 Route::get('/about', [About::class, 'render'])->name('about.index');
-Route::get('/store', [Store::class, 'render'])->name('store.index');
+Route::get('/productList', [Store::class, 'render'])->name('store.index');
 Route::get('/loginForm', [Auth::class, 'loginForm'])->name('loginForm.index');
 Route::post('/loginForm', [Auth::class, 'login'])->name('login');
 
@@ -36,3 +36,6 @@ Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.googl
 Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
 Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 Route::get('/myAccount', [User::class, 'render'])->name('Account.index');
+
+
+

@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -33,13 +34,14 @@ class BrandResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->label('ID')
-                ->sortable()
-                ->CanBeSearchable(),
-                
-                Table\Cloumns\TextColumns::make('name')
-
-
+                    ->label('ID')
+                    ->sortable()
+                    ->searchable(),  
+    
+                Tables\Columns\TextColumn::make('name')  
+                    ->label('Tên thương hiệu')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -53,6 +55,7 @@ class BrandResource extends Resource
                 ]),
             ]);
     }
+    
 
     public static function getRelations(): array
     {

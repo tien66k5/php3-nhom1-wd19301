@@ -7,9 +7,9 @@
 <section class="account px-5">
     <div class="container-fluid">
         <div class="row g-0">
-            @include('client.components.sideBar')
+            @include('livewire.client.components.sideBar')
             <div class="col-lg-9">
-                <div class="account-info">
+                <div class="account-info">         
                     <div class="account-info-title">
                         <p>THÔNG TIN CÁ NHÂN</p>
                     </div>
