@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Redirect;
 use Filament\Panel;
+use Illuminate\Support\Facades\Auth;
 
 
 class User extends Authenticatable implements FilamentUser
@@ -52,10 +53,11 @@ class User extends Authenticatable implements FilamentUser
 
      public function canAccessPanel(Panel $panel): bool
      {
-        if ($this->role !== 2) {
-            Redirect::route('error.403'); 
+        if (!Auth::check() || Auth::user()->role !== 2) {
+            Redirect::route('error.403')->send();
+            return false; 
         }
-        return true;
+        return true; 
      }
 
      protected function casts(): array

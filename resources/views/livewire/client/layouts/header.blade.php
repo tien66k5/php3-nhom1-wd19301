@@ -28,12 +28,9 @@
                                     <form>
                                         <select class="input-select">
                                             <option value="0">Các danh mục</option>
-                                            {{-- <?php
-                                         
-                                            foreach ($categories as $category) {
-                                                echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
-                                            }
-                                            ?> --}}
+                                            {{-- @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach --}}
                                         </select>
                                         <input class="input" placeholder="Tìm kiếm ở đây">
                                         <button class="search-btn">Tìm kiếm</button>
@@ -47,33 +44,38 @@
                             <!-- ACCOUNT -->
                             <div class="col-md-3 clearfix ">
                                 <div class="header-ctn">
-                                    <!-- Xây dựng PC -->
-                                    {{-- <div>
-                                        <a href="#">
-                                            <i class="fa fa-wrench"></i>
-                                            <span>Xây dựng PC</span>
-                                            <div class="qty">2</div>
-                                        </a>
-                                    </div> --}}
-                                    <div class="dropdown">
-                                        <a class="btn" href="/loginForm" role="button">
-                                            <i class="fa fa-sign-in"></i>
-                                            <span>Đăng nhập</span>
-                                        </a>  
-                                    </div> 
-                                    <!-- Tài khoản -->
-                                    <div class="dropdown">
-                                        <a class="btn" href="/myAccount" role="button" id="dropdownMenuLink" aria-expanded="false">
-                                            <i class="fa fa-user"></i>
-                                            
-                                            <span>
-                                                {{ Auth::check() ? Auth::user()->name : 'Tài khoản' }}
-                                            </span>
-                                        </a>
-                                                              
+                                   
+    <!-- Hiển thị "Xây dựng PC" nếu đã đăng nhập -->
+    <div>
+        <a href="#">
+            <i class="fa fa-wrench"></i>
+            <span>Xây dựng PC</span>
+            <div class="qty">2</div>
+        </a>
+    </div>
 
-                                    </div>
-                                    
+
+@if(!Auth::check()) 
+<div class="dropdown">
+    <a class="btn" href="/loginForm" role="button">
+        <i class="fa fa-sign-in"></i>
+        <span>Đăng nhập</span>
+    </a>  
+</div>
+@endif
+
+<!-- Tài khoản -->
+@if(Auth::check())
+<div class="dropdown">
+    <a class="btn" href="/myAccount" role="button" id="dropdownMenuLink" aria-expanded="false">
+        <i class="fa fa-user"></i>
+        <span>
+            {{ Auth::user()->name }}
+        </span>
+    </a>
+</div>
+@endif
+                                
                                      
                                     
                                     <!-- Giỏ hàng -->
@@ -86,9 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <!-- /ACCOUNT -->
 
                             <!-- /ACCOUNT -->

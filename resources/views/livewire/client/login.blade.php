@@ -7,14 +7,13 @@
   <div class="container">
     <section class="vh-100">
     <div class="container-fluid">
+
+      <div class="row">
       @if (session('success'))
       <div class="alert alert-success">
       {{ session('success') }}
       </div>
     @endif
-
-
-      <div class="row">
       <div class="col-sm-6 text-black">
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
         <form action="/loginForm" method="POST" style="width: 23rem;">
@@ -22,13 +21,14 @@
           <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng Nhập</h3>
 
           <div class="form-outline mb-4">
-          <label class="form-label">Email</label>
-          <input name="email" type="email" class="form-control form-control-lg" placeholder="Nhập email của bạn"
-            value="{{ old('email') }}" />
-          @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-
-          </div>
-
+            <label class="form-label" for="email">Email</label>
+            <input name="email" type="email" class="form-control form-control-lg" placeholder="Nhập email của bạn"
+                   value="{{ old('email') }}" />
+            @error('email')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        
           <div class="form-outline mb-4">
           <label class="form-label">Mật khẩu</label>
           <input name="password" type="password" class="form-control form-control-lg"
@@ -46,7 +46,7 @@
 
           </div>
 
-          <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Quên mật khẩu?</a></p>
+          <p class="small mb-5 pb-lg-2"><a class="text-muted" href="/forgot-password">Quên mật khẩu?</a></p>
           <p>Bạn chưa có tài khoản? <a href="/registerForm" class="link-info">Đăng ký ngay</a></p>
 
           @if (session('error'))

@@ -6,6 +6,13 @@
         <div class="account-sidebar-title">
             <p>Xin Chào, Men!</p>
         </div>
+        <div class="user-avatar">
+            <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('images/default-avatar.png') }}" 
+                 alt="User Avatar" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+        </div>
+        
+        
+        
         <div class="account-sidebar-main">
             <ul>
                 <li>
