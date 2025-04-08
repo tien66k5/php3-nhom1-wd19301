@@ -236,17 +236,6 @@
                             <!-- tab -->
                             <div id="tab2" class="tab-pane fade in active">
                                 <div class="products-slick" data-nav="#slick-nav-2">
-<<<<<<< HEAD
-                                    {{-- @foreach($products as $product)
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="{{ asset('uploads/' . $product->thumbnail) }}" alt="{{ $product->name }}">
-                                                <div class="product-label">
-                                                    @if($product->price > 0 && $product->discount > 0)
-                                                    <span
-                                                        class="sale">-{{ round(($product->discount / $product->price) * 100) }}%</span>
-=======
                                      @foreach($products as $product)
                                     <!-- product -->
                                     <div class="product">
@@ -257,15 +246,10 @@
                                                 @if($product->price > 0 && $product->discount > 0)
                                                 <span class="sale">-{{ round(($product->discount / $product->price) * 100)
                                                     }}%</span>
->>>>>>> 4e4d07d ([HTML CLIENT]Hoàn thiện các chức năng của user)
                                                 @endif
                                                 <span class="new">NEW</span>
                                             </div>
                                         </div>
-<<<<<<< HEAD
-                                        <!-- /product -->
-                                    @endforeach --}}
-=======
                                         <div class="product-body">
                                             <p class="product-category">Category</p>
                                             <h3 class="product-name">
@@ -304,7 +288,6 @@
                                     </div>
                                     <!-- /product -->
                                     @endforeach
->>>>>>> 4e4d07d ([HTML CLIENT]Hoàn thiện các chức năng của user)
                                 </div>
                                 <div id="slick-nav-2" class="products-slick-nav"></div>
                             </div>
