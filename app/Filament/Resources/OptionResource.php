@@ -20,6 +20,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\IconColumn;
 
 class OptionResource extends Resource
 {
@@ -47,12 +48,9 @@ class OptionResource extends Resource
                             ->deletable()->addable(),
                     ])
                     ->columns(2),
-                Select::make('status')
+                Toggle::make('status')
                     ->label('Trạng thái')
-                    ->options([
-                        1 => 'Hoạt Động',
-                        0 => 'Khóa',
-                    ])
+                    ->default(true),
             ]);
     }
 
@@ -63,12 +61,10 @@ class OptionResource extends Resource
                 TextColumn::make('id')->label('ID'),
                 TextColumn::make('name')->label('Tên thuộc tính'),
                 TextColumn::make('optionValues.value_name')->label('Giá trị')->limit(3),
-                TextColumn::make('status')->label('Trạng thái')->formatStateUsing(function ($state) {
-                    return match ($state) {
-                        1 => 'Hoạt động',
-                        2 => 'Khóa',
-                    };
-                }),
+                IconColumn::make('status')
+                    ->label('Trạng thái')
+                    ->boolean()
+                    ->sortable(),
             ])
             ->filters([
                 //

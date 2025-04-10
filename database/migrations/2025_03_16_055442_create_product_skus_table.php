@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->text('images')->nullable();
             $table->unsignedInteger('quantity')->default(0);
             $table->unsignedBigInteger('product_id');
+            $table->integer('price');
             $table->timestamps();
 
             // Khóa ngoại

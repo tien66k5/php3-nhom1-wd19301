@@ -9,6 +9,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
@@ -37,13 +38,9 @@ class BrandResource extends Resource
                     ->label('Hình ảnh')
                     ->image()
                     ->directory('brands'),
-                Select::make('status')
+                Toggle::make('status')
                     ->label('Trạng thái')
-                    ->options([
-                        1 => 'Hoạt Động',
-                        0 => 'Khóa',
-                    ])
-                    ->default(1),
+                    ->default(true),
                 Textarea::make('description')
                     ->label('Mô tả')
                     ->rows(3),
@@ -58,7 +55,10 @@ class BrandResource extends Resource
                     ->sortable()->searchable(),
                 ImageColumn::make('image')->label('Hình ảnh')
                     ->circular(),
-                BooleanColumn::make('status')->label('Trạng thái'),
+                Tables\Columns\IconColumn::make('status')
+                    ->label('Trạng thái')
+                    ->boolean()
+                    ->sortable(),
                 TextColumn::make('description')->label('Mô tả')
                     ->limit(50),
             ])
@@ -71,7 +71,7 @@ class BrandResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
 
     public static function getRelations(): array
     {

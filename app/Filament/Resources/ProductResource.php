@@ -25,6 +25,7 @@ use Filament\Tables\Filters\SelectFilter;
 
 use function Laravel\Prompts\select;
 use App\Models\Brand;
+use Filament\Tables\Columns\IconColumn;
 
 class ProductResource extends Resource
 {
@@ -45,12 +46,12 @@ class ProductResource extends Resource
                         TextInput::make('name')
                             ->label('Tên sản phẩm')
                             ->unique(),
-                        Select::make('id')
+                        Select::make('brand_id')
                             ->label('Thương hiệu')
                             ->relationship('brand', 'name'),
-                        Select::make('id')
-                            ->label('Phân loại (đang là thương hiệu)')
-                            ->relationship('brand', 'name'),
+                        Select::make('category_id')
+                            ->label('Phân loại ')
+                            ->relationship('category', 'name'),
                     ])
                     ->columns(3),
                 Textarea::make('short_description')
@@ -75,6 +76,9 @@ class ProductResource extends Resource
                             TextInput::make('quantity')
                                 ->numeric()
                                 ->label('Số lượng'),
+                                TextInput::make('price')
+                                ->label('Giá')
+                                ->numeric()
                         ])->columns(3),
 
                     Repeater::make('skuValues')
@@ -94,9 +98,7 @@ class ProductResource extends Resource
                                     $get('option_id') ? OptionValue::where('option_id', $get('option_id'))->pluck('value_name', 'id') : []
                                 )
                                 ->searchable(),
-                            TextInput::make('price')
-                                ->label('Giá')
-                                ->numeric()
+                            
                         ])
                         ->columns(3)
                         ->columnSpanFull(),
@@ -111,13 +113,9 @@ class ProductResource extends Resource
                     ->rules(['min:1'])
                     ->columns(2)
                     ->columnSpanFull(),
-                Select::make('status')
+                Toggle::make('status')
                     ->label('Trạng thái')
-                    ->options([
-                        1 => 'Hoạt Động',
-                        0 => 'Khóa',
-                    ])
-
+                    ->default(true),
             ]);
     }
 
@@ -133,12 +131,10 @@ class ProductResource extends Resource
                 TextColumn::make('brands.name')
                     ->label('Tên thương hiệu'),
                 TextColumn::make('variant')->label('Biến thể')->getStateUsing(fn($record) => ProductSku::where('product_id', $record->id)->count('sku')),
-                TextColumn::make('status')->label('Trạng thái')->formatStateUsing(function ($state) {
-                    return match ($state) {
-                        1 => 'Hoạt động',
-                        2 => 'Khóa',
-                    };
-                })->searchable(),
+               IconColumn::make('status')
+                    ->label('Trạng thái')
+                    ->boolean()
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('brand_id')->options(Brand::all()->pluck('name', 'id'))

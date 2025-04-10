@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('sku_id');
             $table->unsignedBigInteger('option_id');
             $table->unsignedBigInteger('value_id');
-            $table->integer('price')->after('value_id')->default(0);
             $table->timestamps();
 
             // Foreign Keys

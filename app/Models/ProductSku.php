@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSku extends Model
 {
     protected $table = 'product_skus';
-    protected $fillable = ['sku', 'images', 'quantity', 'product_id'];
+    protected $fillable = ['sku', 'images', 'quantity', 'product_id', 'price'];
 
     public function skuValues() {
         return $this->hasMany(SkuValue::class, 'sku_id');
