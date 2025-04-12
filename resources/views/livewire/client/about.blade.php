@@ -1,9 +1,5 @@
-@extends('livewire.client.layouts.app')
-
-@section('title', 'Trang Chủ')
-
-@section('content')
-
+<div>
+    
 <div class="row aboutContainer mt-4 justify-content-center">
     <div class="col-xl-12 col-md-12">
         <div class="border-title-bottom-custom mb-5 text-center">
@@ -57,11 +53,4 @@
 </div>
 
 
-
-@endsection
-
-@section('scripts')
-    <script>
-    //   viết script tại đây nếu đây là script riêng
-    </script>
-@endsection
+</div>

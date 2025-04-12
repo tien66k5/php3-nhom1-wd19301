@@ -1,9 +1,5 @@
-@extends('livewire.client.layouts.app')
-
-@section('title', 'Trang Chủ')
-
-@section('content')
-
+<div>
+    
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -99,11 +95,4 @@
 </section>
 
 
-
-@endsection
-
-@section('scripts')
-    <script>
-    //   viết script tại đây nếu đây là script riêng
-    </script>
-@endsection
+</div>

@@ -1,9 +1,5 @@
-@extends('livewire.client.layouts.app')
-
-@section('title', 'Trang Sản Phẩm')
-
-@section('content')
-
+<div>
+    
 <div id="breadcrumb" class="section">
     <!-- container -->
     <div class="container">
@@ -512,11 +508,4 @@
 <!-- /Section -->
 
 
-
-@endsection
-
-@section('scripts')
-    <script>
-    //   viết script tại đây nếu đây là script riêng
-    </script>
-@endsection
+</div>

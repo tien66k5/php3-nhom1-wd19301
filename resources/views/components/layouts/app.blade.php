@@ -38,8 +38,9 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-   
-       
+    @livewireStyles
+
+    
     
     
 
@@ -48,17 +49,19 @@
 <body>
 
     <!-- Header -->
-    @include('livewire.client.layouts.header')
+    @include('components.layouts.header')
 
-    @include('livewire.client.layouts.nav')
+    @include('components.layouts.nav')
 
     <!-- Nội dung chính -->
     <div class="container">
-        @yield('content')
+        {{-- @yield('content') --}}
+        {{ $slot }}
+
     </div>
 
     <!-- Footer -->
-    @include('livewire.client.layouts.footer')
+    @include('components.layouts.footer')
     <!-- Scripts chung -->
     <script src="{{ asset('client/js/jquery.min.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
@@ -70,6 +73,7 @@
 
     <!-- Nơi để thêm script cho từng trang riêng -->
     @yield('scripts')
+    @livewireScripts
 
 </body>
 

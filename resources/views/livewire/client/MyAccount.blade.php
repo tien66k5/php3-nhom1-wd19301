@@ -1,10 +1,5 @@
-@extends('livewire.client.layouts.app')
-
-@section('title', 'Thông Tin Cá Nhân')
-
-@section('content')
-
-
+<div>
+    
     <section class="account px-5">
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -112,7 +107,7 @@
 
     </section>
 
-@endsection
+</div>
 @section('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function () {

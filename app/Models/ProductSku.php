@@ -16,5 +16,7 @@ class ProductSku extends Model
     public function cart() {
         
     }
-    
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
 }
