@@ -40,6 +40,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
     @livewireStyles
 
+
     
     
     
@@ -69,11 +70,15 @@
     <script src="{{ asset('client/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('client/js/jquery.zoom.min.js') }}"></script>
     <script src="{{ asset('client/js/main.js') }}"></script>
+    <script src="https://unpkg.com/livewire@3.6.2/dist/livewire.js"></script>
 
 
     <!-- Nơi để thêm script cho từng trang riêng -->
     @yield('scripts')
     @livewireScripts
+    <script>
+        window.Alpine = Alpine;
+    </script>
 
 </body>
 

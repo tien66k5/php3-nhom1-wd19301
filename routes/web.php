@@ -15,6 +15,7 @@ use App\Livewire\Client\Auth\Login;
 use App\Livewire\Client\Auth\Register;
 use App\Livewire\Client\Auth\ForgotPassword;
 use App\Livewire\Client\Auth\ResetPassword;
+
 use function Termwind\render;
 session_start();
 Route::get('/', Home::class)->name('home.index');
@@ -26,7 +27,7 @@ Route::get('/product/{id}', ProductDetail::class)->name('product.detail');
 Route::get('/blank', Blank::class)->name('blank.index');
 Route::get('/contact', Contact::class)->name('contact.index');
 Route::get('/about', About::class)->name('about.index');
-Route::get('/productList', Store::class)->name('store.index');
+Route::get('/store', Store::class)->name('store');
 Route::get('/loginForm', Login::class)->name('loginForm.index');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');

@@ -611,6 +611,8 @@ textarea.input {
   top: 0px;
 }
 
+
+
 .cart-dropdown .cart-list .product-widget .product-body .product-price {
   color: #2b2d42;
 }
@@ -2857,4 +2859,95 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   width: 100%;  
   height: 250px;  
   object-fit: cover;  
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #eee;
+  padding: 10px;
+  transition: all 0.2s;
+  background-color: #fff;
+}
+
+
+
+.product-img {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-img img {
+  max-height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+  min-height: 45px;
+  height: 70px;
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+
+
+/* Style cho dropdown */
+.category-dropdown {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.category-dropdown li {
+  margin: 5px 0;
+}
+
+.category-dropdown li input {
+  margin-right: 5px;
+}
+/* Style cho các block danh mục */
+.category-block {
+  margin-bottom: 15px;
+}
+
+.category-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.category-toggle .arrow {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.category-block.active .category-toggle .arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown list cho category values */
+.subcategory-list {
+  display: none;
+  padding-left: 20px;
+  margin-top: 5x;
+  list-style-type: none;
+}
+
+.subcategory-list label {
+  display: block;
+  margin: 5px 0;
+  cursor: pointer;
 }
