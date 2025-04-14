@@ -9,6 +9,7 @@
                 <div id="aside" class="col-md-3">
                     <!-- Widget bên -->
 
+
                     <div class="aside">
                         <div class="category-filter">
                             <h3 class="aside-title">DANH MỤC</h3>
@@ -57,7 +58,7 @@
                         <h3 class="aside-title">Thương hiệu</h3>
                         <div class="checkbox-filter">
                             <div class="brand-filter">
-                              
+
                                 @foreach ($brands as $brand)
                                     <div class="checkbox-item">
                                         <label>
@@ -78,6 +79,9 @@
 
                 <!-- KHU VỰC SẢN PHẨM -->
                 <div id="store" class="col-md-9">
+                    @if ($search)
+                        <h4>Kết quả tìm kiếm cho: <strong>"{{ $search }}"</strong></h4>
+                    @endif
                     <!-- thanh lọc phía trên cửa hàng -->
                     <div class="store-filter clearfix">
                         <div class="store-sort">
@@ -187,7 +191,7 @@
                         </ul>
                     </div>
 
-                    <button wire:click="testClick">Test Click</button>
+
 
                     <!-- /bộ lọc phía dưới -->
                 </div>

@@ -25,16 +25,15 @@
                             <!-- SEARCH BAR -->
                             <div class="col-md-6">
                                 <div class="header-search">
-                                    <form>
+                                    <form action="{{ route('store') }}" method="GET">
                                         <select class="input-select">
                                             <option value="0">Các danh mục</option>
-                                            {{-- @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach --}}
+                                            {{-- Có thể thêm category filter ở đây nếu muốn --}}
                                         </select>
-                                        <input class="input" placeholder="Tìm kiếm ở đây">
-                                        <button class="search-btn">Tìm kiếm</button>
+                                        <input name="search" class="input" placeholder="Tìm kiếm ở đây">
+                                        <button type="submit" class="search-btn">Tìm kiếm</button>
                                     </form>
+                                    
                                 </div>
                             </div>
 
