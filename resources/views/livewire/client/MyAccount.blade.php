@@ -12,7 +12,8 @@
 
         <div class="container-fluid">
             <div class="row g-0">
-                @livewire('Client.SideBar')
+                @include('components.side-bar')
+
                 <div class="col-lg-9">
                     <div class="account-info">
                         <div class="account-info-title">

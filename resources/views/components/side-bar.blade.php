@@ -1,5 +1,5 @@
 
-{{-- @section('content') --}}
+
 
 <div class="col-lg-3">
     <div class="account-sidebar">
@@ -61,4 +61,4 @@
 
 </div>
 
-{{-- @endsection --}}
+ 

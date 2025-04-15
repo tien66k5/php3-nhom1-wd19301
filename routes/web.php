@@ -15,6 +15,8 @@ use App\Livewire\Client\Auth\Login;
 use App\Livewire\Client\Auth\Register;
 use App\Livewire\Client\Auth\ForgotPassword;
 use App\Livewire\Client\Auth\ResetPassword;
+use App\Livewire\Client\Order;
+use App\Livewire\Client\OrderUser;
 
 use function Termwind\render;
 session_start();
@@ -41,8 +43,10 @@ Route::get('/reset-password/{token}', ResetPassword::class)->name('password.rese
 
 // Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
-// Route::get('/myAccount', UserComponent::class)->name('Account.index');
+Route::get('/myAccount', UserComponent::class)->name('Account.index');
+Route::get('/Orders', OrderUser::class)->name('Order.index');
 // Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
+
 
 
 
@@ -62,7 +66,7 @@ Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.googl
 Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
 Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
-Route::get('/myAccount', [UserComponent::class, 'render'])->name('Account.index');
+// Route::get('/myAccount', [UserComponent::class, 'render'])->name('Account.index');
 Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
 
 

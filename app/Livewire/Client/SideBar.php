@@ -9,7 +9,7 @@ use Livewire\Component;
 {
     public function render()
     {
-        return view('livewire.client.components.sideBar');
+        return view('components.sideBar');
     }
 
 }

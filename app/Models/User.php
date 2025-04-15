@@ -51,21 +51,23 @@ class User extends Authenticatable implements FilamentUser
      * @return array<string, string>
      */
 
-     public function canAccessPanel(Panel $panel): bool
-     {
+    public function canAccessPanel(Panel $panel): bool
+    {
         if (!Auth::check() || Auth::user()->role !== 2) {
             Redirect::route('error.403');
-            return false; 
+            return false;
         }
-        return true; 
-     }
+        return true;
+    }
 
-     protected function casts(): array
+    protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    } 
+    }
+    // app/Models/User.php
+
 
 }
