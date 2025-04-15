@@ -46,7 +46,7 @@
                                    
     <!-- Hiển thị "Xây dựng PC" nếu đã đăng nhập -->
     <div>
-        <a href="#">
+        <a href="/config">
             <i class="fa fa-wrench"></i>
             <span>Xây dựng PC</span>
             <div class="qty">2</div>

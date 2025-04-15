@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="{{ asset('client/css/MyAccount.css') }}">
 
-    {{-- <link rel="stylesheet" href="{{asset('client/css/bootstrap.min1.css')}}">  --}}
+     <link rel="stylesheet" href="{{asset('client/css/config.css')}}"> 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/style.css') }}" />
 

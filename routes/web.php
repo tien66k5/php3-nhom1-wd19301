@@ -17,6 +17,7 @@ use App\Livewire\Client\Auth\ForgotPassword;
 use App\Livewire\Client\Auth\ResetPassword;
 use App\Livewire\Client\Order;
 use App\Livewire\Client\OrderUser;
+use App\Livewire\Client\Config;
 
 use function Termwind\render;
 session_start();
@@ -34,6 +35,8 @@ Route::get('/loginForm', Login::class)->name('loginForm.index');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
+
+Route::get('/config',Config::class)->name('config.index');
 // Route::post('/forgot-password', [Auth::class, 'forgotEmail'])->name('password.email');
 // Route::get('/reset-password/{token}', [Auth::class, 'resetForm'])->name('password.reset');
 // Route::post('/reset-password', [Auth::class, 'resetPasswordUpdate'])->name('password.update');
