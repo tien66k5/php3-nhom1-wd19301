@@ -17,9 +17,13 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use App\Filament\Widgets\DashboardStats;
+use App\Filament\Widgets\RevenueChart;
+use App\Filament\Widgets\OrderStatusChart;
+use App\Filament\Widgets\BestSellingProductsChart;
 class AdminPanelProvider extends PanelProvider
 {
+    protected static ?string $navigationLabel = 'Thống kê';
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -37,8 +41,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                DashboardStats::class,
+                RevenueChart::class,
+                OrderStatusChart::class,
+       
+
             ])
             ->middleware([
                 EncryptCookies::class,
