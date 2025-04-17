@@ -4,7 +4,7 @@
 <div class="col-lg-3">
     <div class="account-sidebar">
         <div class="account-sidebar-title">
-            <p>Xin Chào, Men!</p>
+            <p>Xin Chào, {{ Auth::user()->name }}!</p>
         </div>
         <div class="user-avatar">
             <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('images/default-avatar.png') }}" 

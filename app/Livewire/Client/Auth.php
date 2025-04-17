@@ -100,9 +100,10 @@ class Auth extends Component
         return redirect()->route('loginForm.index')->with('success', 'Đăng ký thành công');
 
     }
+
     public function forgotForm()
     {
-        return view('livewire.client.forgot-password');
+        return view('livewire.client.auth.forgot-password');
     }
 
     public function forgotEmail(Request $request)
@@ -145,7 +146,7 @@ class Auth extends Component
 
     public function resetForm(Request $request, $token)
     {
-        return view('livewire.client.reset-password', [
+        return view('livewire.client.auth.reset-password', [
             'token' => $token,
             'email' => $request->query('email')
         ]);

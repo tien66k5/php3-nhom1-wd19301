@@ -11,12 +11,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart as CartModel;
 
 use function PHPUnit\Framework\returnCallback;
+use App\Models\Rating;
+use App\Models\Comment;
+use App\Models\Order;
+use App\Models\User;
+use Illuminate\Http\Request;
+
 
 class ProductDetail extends Component
 {
     public $id;
     public $price;
-
+    public $rating;  
+    public $content;
     public $product;
     public $sku;
     public $skuName;
@@ -29,9 +36,13 @@ class ProductDetail extends Component
         $this->id = $id;
         $this->product = Product::findOrFail($this->id);
         $this->sku = ProductSku::where('product_id', $id)->get();
+        $this->product = Product::with('ratings')->find($id);
         $this->images = $this->product->images;
         $this->price = $this->sku->first()->price;
         $this->skuName = $this->sku->first()->sku;
+
+
+ 
     }
 
     public function updateSku($sku)
@@ -92,6 +103,83 @@ class ProductDetail extends Component
     }
     public function render()
     {
-        return view('livewire.client.detail', ['data' => $this->product, 'sku' => $this->sku, 'image' => $this->images, 'price' => $this->price, 'skuName' => $this->skuName]);
+        return view('livewire.client.detail', ['data' => $this->product, 'sku' => $this->sku, 'image' => $this->images, 'price' => $this->price, 'skuName' => $this->skuName,'ratings' => $this->product->ratings()->where('status', 1)->get(),]);
+        
+
     }
+
+    public function store()
+    {
+        $this->validate([
+'rating' => 'required|integer|min:1|max:5',
+    'content' => 'required|string|max:1000',
+        ]);
+    
+        if (!Auth::check()) {
+            return redirect()->route('loginForm.index')->with('error', 'Vui lòng đăng nhập để đánh giá.');
+        }
+    
+        try {
+            $userId = Auth::id();
+            $productId = $this->product->id;
+            $skuId = optional($this->product->defaultSku)->id; 
+
+    
+            // ✅ Kiểm tra người dùng đã mua sản phẩm (qua sku_id) và đơn đã giao (status = 1)
+            $order = Order::where('user_id', $userId)
+                ->where('status', 1)
+                ->whereHas('details', function ($query) use ($skuId) {
+                    $query->where('order_details.sku_id', $skuId); 
+                })
+                ->first();
+    
+            if (!$order) {
+                session()->flash('error', 'Bạn cần mua sản phẩm và có đơn hàng đã giao để có thể đánh giá.');
+                return redirect()->back();
+            }
+    
+
+            /*
+            $hasRated = Rating::where('user_id', $userId)
+                ->where('product_id', $productId)
+                ->exists();
+    
+            if ($hasRated) {
+                session()->flash('error', 'Bạn đã đánh giá sản phẩm này rồi.');
+                return;
+            }
+            */
+    
+            
+            $rating = Rating::create([
+                'rating' => $this->rating,
+                'user_id' => $userId,
+                'product_id' => $productId,
+                'preview' => $this->content,
+                'status' => 1,
+            ]);
+    
+            
+            if (!empty($this->content)) {
+                Comment::create([
+                    'content' => $this->content,
+                    'rating_id' => $rating->id,
+                    'user_id' => $userId,
+                    'product_id' => $productId,
+                    'status' => 1,
+                ]);
+            }
+    
+            session()->flash('success', 'Đánh giá của bạn đã được gửi thành công!');
+            $this->reset(['rating', 'content']);
+    
+        } catch (\Exception $e) {
+            Log::error('Lỗi khi lưu đánh giá: ' . $e->getMessage());
+            session()->flash('error', 'Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
+        }
+    }
+    
+    
+
+
 }

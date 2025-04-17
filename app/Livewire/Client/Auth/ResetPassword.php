@@ -43,7 +43,8 @@ class ResetPassword extends Component
 
         DB::table('password_reset_tokens')->where('email', $this->email)->delete();
 
-        return redirect()->route('loginForm.index')->with('success', 'Mật khẩu đã được cập nhật!');
+        session()->flash('success', 'Mật khẩu đã được cập nhật!');
+        return redirect()->route('loginForm.index');
     }
 
     public function render()
@@ -51,3 +52,5 @@ class ResetPassword extends Component
         return view('livewire.client.auth.reset-password');
     }
 }
+
+

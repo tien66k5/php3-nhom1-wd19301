@@ -2,6 +2,7 @@
 
 use App\Livewire\Client\Home;
 use App\Livewire\Client\Checkout;
+use App\Livewire\Client\Review;
 use App\Livewire\Client\Store;
 use App\Livewire\Client\Blank;
 use App\Livewire\Client\Contact;
@@ -38,12 +39,14 @@ Route::get('/productList', Store::class)->name('store.index');
 Route::get('/loginForm', Login::class)->name('login');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
-Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
+Route::get('/reset-password/{token}', ResetPassword::class)->where('token', '.*') ->name('password.reset');
+
+Route::post('/review',ProductDetail::class)->name('review.index');
 
 Route::get('/config',Config::class)->name('config.index');
-// Route::post('/forgot-password', [Auth::class, 'forgotEmail'])->name('password.email');
+ //Route::post('/forgot-password', [Auth::class])->name('password.email');
 // Route::get('/reset-password/{token}', [Auth::class, 'resetForm'])->name('password.reset');
-// Route::post('/reset-password', [Auth::class, 'resetPasswordUpdate'])->name('password.update');
+//Route::post('/reset-password', [Auth::class, 'resetPasswordUpdate'])->name('password.update');
 
 // Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.google');
 // Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
@@ -64,11 +67,11 @@ Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('A
 // Route::get('/registerForm', [Auth::class, 'registerForm'])->name('registerForm.index');
 // Route::post('/registerForm',[Auth::class, 'register'])->name('register');
 
-// Route::get('/forgot-password', [Auth::class, 'forgotForm'])->name('password.request');
-// Route::post('/forgot-password', [Auth::class, 'forgotEmail'])->name('password.email');
-// Route::get('/reset-password/{token}', [Auth::class, 'resetForm'])  /* ->where('token', '.*') */->name('password.reset');
+ //Route::get('/forgot-password', [Auth::class, 'forgotForm'])->name('password.request');
+ //Route::post('/forgot-password', [Auth::class, 'forgotEmail'])->name('password.email');
+ //Route::get('/reset-password/{token}', [Auth::class, 'resetForm']) ->where('token', '.*') ->name('password.reset');
 
-// Route::post('/reset-password', [Auth::class, 'resetPasswordUpdate'])->name('password.update');
+ //Route::post('/reset-password', [Auth::class, 'resetPasswordUpdate'])->name('password.update');
 
 Route::get('auth/google', [Google::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);

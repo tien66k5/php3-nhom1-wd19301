@@ -21,28 +21,27 @@
             <div class="col-sm-6 text-black">
               <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
     
-                <form method="POST" action="{{ route('password.email') }}" style="width: 23rem;">
-                  @csrf
-                  <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Quên Mật Khẩu</h3>
-    
+                <form wire:submit.prevent="sendResetLink" style="width: 23rem;">
+                  <h3 class="fw-normal mb-3 pb-3">Quên Mật Khẩu</h3>
+              
                   <div class="form-outline mb-4">
-                    <label class="form-label">Email</label>
-                    <input name="email" type="email" class="form-control form-control-lg" 
-                           placeholder="Nhập email của bạn" value="{{ old('email') }}" required />
-                    @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                      <label class="form-label">Email</label>
+                      <input type="email" wire:model.defer="email" class="form-control form-control-lg"
+                             placeholder="Nhập email của bạn" required />
+                      @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                   </div>
-    
+              
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-sm btn-block btn-custom" type="submit">
-                      Gửi liên kết đặt lại mật khẩu
-                    </button>
+                      <button class="btn btn-info btn-sm btn-block btn-custom" type="submit">
+                          Gửi liên kết đặt lại mật khẩu
+                      </button>
                   </div>
-    
+              
                   <p class="small mb-5 pb-lg-2">
-                    <a class="text-muted" href="{{ route('login') }}">Quay lại đăng nhập</a>
+                      <a class="text-muted" href="{{ route('loginForm.index') }}">Quay lại đăng nhập</a>
                   </p>
-    
-                </form>
+              </form>
+              
     
               </div>
             </div>

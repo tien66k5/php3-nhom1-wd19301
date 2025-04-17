@@ -34,4 +34,16 @@ class Product extends Model
     {
         return $this->belongsToMany(CategoryValue::class, 'product_categories', 'product_id', 'category_values_id');
     }
+    
+public function ratings()
+{
+    return $this->hasMany(Rating::class);
+}
+
+public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+
 }

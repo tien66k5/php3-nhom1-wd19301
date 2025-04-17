@@ -1917,31 +1917,83 @@ textarea.input {
   display: none;
 }
 
-.review-form .input-rating .stars>label {
+.review-form .input-rating .stars label {
   float: right;
   cursor: pointer;
-  padding: 0px 3px;
-  margin: 0px;
+  padding: 0 3px;
+  margin: 0;
 }
 
-.review-form .input-rating .stars>label:before {
-  content: "\f006";
+.review-form .input-rating .stars label:before {
+  content: "\f006"; /* icon sao rỗng */
   font-family: FontAwesome;
   color: #e4e7ed;
-  -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
 
-.review-form .input-rating .stars>label:hover:before,
-.review-form .input-rating .stars>label:hover~label:before {
+/* Hover effect */
+.review-form .input-rating .stars label:hover:before,
+.review-form .input-rating .stars label:hover ~ label:before {
   color: #d10024;
 }
 
-.review-form .input-rating .stars>input:checked label:before,
-.review-form .input-rating .stars>input:checked~label:before {
-  content: "\f005";
+/* Khi chọn sao */
+.review-form .input-rating .stars input[type="radio"]:checked ~ label:before {
+  content: "\f005"; /* icon sao đầy */
   color: #d10024;
 }
+
+  .d-none {
+  display: none;
+}  
+
+ #show-more-reviews,
+#collapse-reviews {
+  display: inline-block;
+  background-color: #ef233c;
+  color: #fff;
+  padding: 6px 20px;
+  font-size: 13px;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+#show-more-reviews:hover,
+#collapse-reviews:hover {
+  background-color: #fff;
+  color: #d10024;
+  border-color: #d10024;
+  text-decoration: none !important;
+} 
+
+
+.stars {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.stars input {
+  display: none;
+}
+
+.stars label {
+  font-size: 24px;
+  color: #e4e7ed;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.stars input:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label {
+  color: #d10024;
+}
+
 
 /*=========================================================
 	09 -> CHECKOUT PAGE

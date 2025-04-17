@@ -2,16 +2,22 @@
   <div class="container">
     <section class="vh-100">
       <div class="container-fluid">
-
         <div class="row">
           @if (session('success'))
-        <div class="alert alert-success">
-        {{ session('success') }}
-        </div>
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
       @endif
+      @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+      
           <div class="col-sm-6 text-black">
             <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-              <<form wire:submit.prevent="login" style="width: 23rem;">
+              <form wire:submit.prevent="login" style="width: 23rem;">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng Nhập</h3>
 
                 <div class="form-outline mb-4">

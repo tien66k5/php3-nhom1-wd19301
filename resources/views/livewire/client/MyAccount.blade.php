@@ -78,23 +78,23 @@
                                     @enderror
                                 </div>
 
+                                @unless (Auth::user()->google_id)
                                 <div class="form-group">
                                     <label for="password" class="form-label">Mật khẩu mới (nếu muốn thay đổi)</label>
-                                    <input type="password" id="password" name="password"
-                                        class="form-control form-control-lg">
+                                    <input type="password" id="password" name="password" class="form-control form-control-lg">
                                     @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
-
+                            
                                 <div class="form-group">
                                     <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-                                    <input type="password" id="password_confirmation" name="password_confirmation"
-                                        class="form-control form-control-lg">
+                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg">
                                     @error('password_confirmation')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
+                            @endunless
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg">Lưu thay đổi</button>
