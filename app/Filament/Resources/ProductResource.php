@@ -52,8 +52,10 @@ class ProductResource extends Resource
                         Select::make('category_id')
                             ->label('Phân loại ')
                             ->relationship('category', 'name'),
+                            TextInput::make('discount')
+                            ->label('Giảm giá %')
                     ])
-                    ->columns(3),
+                    ->columns(4),
                 Textarea::make('short_description')
                     ->rows(5)
                     ->label('Mô tả ngắn'),

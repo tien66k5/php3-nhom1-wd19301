@@ -8,21 +8,30 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['total_price', 'user_id', 'status', 'address_id'];
+    protected $fillable = [
+        'user_id',
+        'address_id',
+        'status',
+        'total_price',
+        'create_at',
+    ];
+
+    public $timestamps = false;
+
+    protected $table = 'orders';
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
-    public function address()
-    {
-        return $this->belongsTo(CheckoutAddress::class, 'address_id');
-    }
-    
+
+    // public function address()
+    // {
+    //     return $this->belongsTo(Address::class);
+    // }
+
     public function details()
     {
         return $this->hasMany(OrderDetail::class);
     }
-    
 }

@@ -9,13 +9,12 @@ class Product extends Model
 {
 
     protected $table = 'products';
-    protected $fillable = ['name', 'description', 'total_quantity', 'images', 'short_description', 'status', 'category_id'];
+    protected $fillable = ['name', 'description', 'total_quantity', 'images', 'short_description', 'status', 'category_id','discount'];
     protected $casts = [
         'images' => 'array',
     ];
 
-    public function productSkus()
-    {
+    public function productSku() {
         return $this->hasMany(ProductSku::class);
     }
     public function defaultSku()

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Password;
 
@@ -32,6 +33,7 @@ class Auth extends Component
           
             $user = FacadesAuth::user();
             session(['user' => $user]);
+            Session::regenerate();
 
             return redirect()->route('home.index')->with('success', 'Đăng nhập thành công!');
         }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class OptionValue extends Model
 {
     protected $table = 'option_values';
-    protected $fillable = ['product_id', 'option_id', 'value_name', 'status', 'price'];
+    protected $fillable = ['product_id', 'option_id', 'value_name', 'status'];
 
     public function option()
     {

@@ -18,13 +18,15 @@ use App\Livewire\Client\Auth\ResetPassword;
 use App\Livewire\Client\Order;
 use App\Livewire\Client\OrderUser;
 use App\Livewire\Client\Config;
+use App\Livewire\Client\Cart;
 
 use function Termwind\render;
 session_start();
 Route::get('/', Home::class)->name('home.index');
 Route::get('/home', Home::class)->name('home.index');
-Route::get('/cart', Checkout::class)->name('Account.index');
+Route::get('/cart', Cart::class)->middleware('auth')->name('cart.index');
 Route::get('/checkout', Checkout::class)->name('checkout.index');
+
 Route::get('/product/{id}', ProductDetail::class)->name('product.detail');
 
 Route::get('/blank', Blank::class)->name('blank.index');
@@ -32,6 +34,8 @@ Route::get('/contact', Contact::class)->name('contact.index');
 Route::get('/about', About::class)->name('about.index');
 Route::get('/store', Store::class)->name('store');
 Route::get('/loginForm', Login::class)->name('loginForm.index');
+Route::get('/productList', Store::class)->name('store.index');
+// Route::get('/loginForm', Login::class)->name('login');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
@@ -47,8 +51,12 @@ Route::get('/config',Config::class)->name('config.index');
 // Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
 Route::get('/myAccount', UserComponent::class)->name('Account.index');
+<<<<<<< HEAD
 Route::get('/Orders', OrderUser::class)->name('Order.index');
 // Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
+=======
+Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
+>>>>>>> e90e548 ([System][Client]chi tiết sản phẩm, giỏ hàng, thanh toán)
 
 
 
@@ -70,7 +78,11 @@ Route::get('auth/google/callback', [Google::class, 'handleGoogleCallback']);
 Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
 // Route::get('/myAccount', [UserComponent::class, 'render'])->name('Account.index');
+<<<<<<< HEAD
 Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
+=======
+// Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
+>>>>>>> e90e548 ([System][Client]chi tiết sản phẩm, giỏ hàng, thanh toán)
 
 
 

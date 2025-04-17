@@ -16,7 +16,7 @@
                             <div class="col-md-3">
                                 <div class="header-logo">
                                     <a href="/" class="logo">
-                                        <img src="<?= $_ENV['APP_URL'] ?>/public/Assets/Client/img/MaxStore (3) (1).png" alt="">
+                                        <img style="width:80px; border-radius:30%;" src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/461328492_1243063690209847_5705983857865904213_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=nAZL61XcyLIQ7kNvwFDSV9q&_nc_oc=AdlPL2nf1g1uabar-CC8rUmVV2GABA56tM5M7HwmoOxNT-t_VuaMKeij1wdUKo5xOUWwZGlQOmtM79ZUWdaqqE51&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=37QK2rlJvI9VRJwVPqfnww&oh=00_AfE3ZziEMWNibON_bdA5J-P1EA90Epd7QDqiqow9TVfd_Q&oe=68045A8D" alt="">
                                     </a>
                                 </div>
                             </div>

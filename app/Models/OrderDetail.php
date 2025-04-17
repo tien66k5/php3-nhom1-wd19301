@@ -8,16 +8,24 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'sku_id', 'price', 'quantity'];
+    protected $fillable = [
+        'order_id',
+        'sku_id',
+        'price',
+        'quantity',
+    ];
+
+    public $timestamps = false;
+
+    protected $table = 'order_details';
 
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
-    
-    public function productSku()
+
+    public function sku()
     {
-        return $this->belongsTo(ProductSku::class, 'sku_id');
+        return $this->belongsTo(ProductSku::class);
     }
-    
 }
