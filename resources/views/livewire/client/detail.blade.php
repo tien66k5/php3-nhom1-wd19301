@@ -120,7 +120,7 @@
 
                         <ul class="product-links">
                             <li>Danh mục:</li>
-                            <li><a href="#">{{$product->category->name}}</a></li>
+                            {{-- <li><a href="#">{{$product->categoryValue->}}</a></li> --}}
                         </ul>
 
                         {{-- <ul class="product-links">
