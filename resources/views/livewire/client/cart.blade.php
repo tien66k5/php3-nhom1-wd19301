@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price">{{number_format($item->productSku->price)}} NVĐ</span>
+                                        <span class="price">{{number_format($item->productSku->price)}} VNĐ</span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">

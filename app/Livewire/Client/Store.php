@@ -95,13 +95,15 @@ class Store extends Component
         } else {
             $query->orderBy('created_at', 'asc');  
         }
-
+       
         $products = $query->paginate($this->perPage);
-
+    
         return view('livewire.client.store', [
             'products' => $products,
             'brands' => Brand::all(),
             'categories' => Category::with('categoryValues')->get(),
         ]);
     }
+
+
 }

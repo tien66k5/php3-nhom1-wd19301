@@ -1,36 +1,37 @@
 <div>
-    
 
-<div id="breadcrumb" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="breadcrumb-header">Regular Page</h3>
-                <ul class="breadcrumb-tree">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">Blank</li>
-                </ul>
+    <!-- PHẦN ĐƯỜNG DẪN BÁNH MÌ (BREADCRUMB) -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- dòng -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="breadcrumb-header">Trang thông thường</h3>
+                    <ul class="breadcrumb-tree">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li class="active">Trống</li>
+                    </ul>
+                </div>
             </div>
+            <!-- /dòng -->
         </div>
-        <!-- /row -->
+        <!-- /container -->
     </div>
-    <!-- /container -->
-</div>
-<!-- /BREADCRUMB -->
+    <!-- /BREADCRUMB -->
 
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
+    <!-- PHẦN NỘI DUNG -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- dòng -->
+            <div class="row">
+                <!-- Hiện tại chưa có nội dung ở đây -->
+            </div>
+            <!-- /dòng -->
         </div>
-        <!-- /row -->
+        <!-- /container -->
     </div>
-    <!-- /container -->
-</div>
-<!-- /SECTION -->
+    <!-- /PHẦN NỘI DUNG -->
 
 </div>

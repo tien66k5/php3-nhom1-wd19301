@@ -20,6 +20,7 @@ use App\Livewire\Client\Order;
 use App\Livewire\Client\OrderUser;
 use App\Livewire\Client\Config;
 use App\Livewire\Client\Cart;
+use Doctrine\DBAL\Driver\Middleware;
 
 use function Termwind\render;
 session_start();
@@ -33,7 +34,7 @@ Route::get('/product/{id}', ProductDetail::class)->name('product.detail');
 Route::get('/blank', Blank::class)->name('blank.index');
 Route::get('/contact', Contact::class)->name('contact.index');
 Route::get('/about', About::class)->name('about.index');
-Route::get('/store', Store::class)->name('store');
+Route::get('/store', Store::class)->Middleware('auth')->name('store');
 // Route::get('/loginForm', Login::class)->name('loginForm.index');
 Route::get('/productList', Store::class)->name('store.index');
 Route::get('/loginForm', Login::class)->name('login');
