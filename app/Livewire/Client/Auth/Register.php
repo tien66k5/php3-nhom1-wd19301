@@ -32,7 +32,7 @@ class Register extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        return redirect()->route('loginForm.index')->with('success', 'Đăng ký thành công!');
+        return redirect()->route('login')->with('success', 'Đăng ký thành công!');
     }
 
     public function render()

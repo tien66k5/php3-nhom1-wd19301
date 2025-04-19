@@ -121,7 +121,7 @@ class Checkout extends Component
     public function render()
     {
         if (!Auth::check()) {
-            return redirect()->route('loginForm.index');
+            return redirect()->route('login');
         }
         return view('livewire.client.checkout', ['user' => $this->user, 'dataCart' => $this->dataCart]);
     }

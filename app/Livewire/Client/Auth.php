@@ -64,7 +64,7 @@ class Auth extends Component
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('loginForm.index')->with('success', 'Đăng xuất thành công!');
+        return redirect()->route('login')->with('success', 'Đăng xuất thành công!');
     }
 
     public function registerForm()
@@ -97,7 +97,7 @@ class Auth extends Component
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('loginForm.index')->with('success', 'Đăng ký thành công');
+        return redirect()->route('login')->with('success', 'Đăng ký thành công');
 
     }
 

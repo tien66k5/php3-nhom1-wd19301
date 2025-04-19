@@ -116,7 +116,7 @@ class ProductDetail extends Component
         ]);
     
         if (!Auth::check()) {
-            return redirect()->route('loginForm.index')->with('error', 'Vui lòng đăng nhập để đánh giá.');
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để đánh giá.');
         }
     
         try {

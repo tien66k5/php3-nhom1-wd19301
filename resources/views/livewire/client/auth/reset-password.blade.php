@@ -48,7 +48,7 @@
                               </div>
 
                               <p class="small mb-5 pb-lg-2">
-                                  <a class="text-muted" href="{{ route('loginForm.index') }}">Quay lại đăng nhập</a>
+                                  <a class="text-muted" href="{{ route('login') }}">Quay lại đăng nhập</a>
                               </p>
                           </form>
 

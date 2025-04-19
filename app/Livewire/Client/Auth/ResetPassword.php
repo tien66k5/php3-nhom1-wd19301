@@ -44,7 +44,7 @@ class ResetPassword extends Component
         DB::table('password_reset_tokens')->where('email', $this->email)->delete();
 
         session()->flash('success', 'Mật khẩu đã được cập nhật!');
-        return redirect()->route('loginForm.index');
+        return redirect()->route('login');
     }
 
     public function render()

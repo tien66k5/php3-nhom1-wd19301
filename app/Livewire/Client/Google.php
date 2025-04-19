@@ -38,7 +38,7 @@ class Google extends Component
             return redirect()->route('home.index')->with('success', 'Đăng nhập Google thành công!');
         } catch (\Exception $e) {
            // dd($e->getMessage());
-            return redirect()->route('loginForm.index')->with('error', 'Đăng nhập Google thất bại!');
+            return redirect()->route('login')->with('error', 'Đăng nhập Google thất bại!');
         }
         
     }

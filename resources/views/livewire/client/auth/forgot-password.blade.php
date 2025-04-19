@@ -33,12 +33,12 @@
               
                   <div class="pt-1 mb-4">
                       <button class="btn btn-info btn-sm btn-block btn-custom" type="submit">
-                          Gửi liên kết đặt lại mật khẩu
+                          Nhận mã
                       </button>
                   </div>
               
                   <p class="small mb-5 pb-lg-2">
-                      <a class="text-muted" href="{{ route('loginForm.index') }}">Quay lại đăng nhập</a>
+                      <a class="text-muted" href="{{ route('login') }}">Quay lại đăng nhập</a>
                   </p>
               </form>
               

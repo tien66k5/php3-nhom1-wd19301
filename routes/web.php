@@ -37,7 +37,7 @@ Route::get('/about', About::class)->name('about.index');
 Route::get('/store', Store::class)->Middleware('auth')->name('store');
 // Route::get('/loginForm', Login::class)->name('loginForm.index');
 Route::get('/productList', Store::class)->name('store.index');
-Route::get('/loginForm', Login::class)->name('login');
+Route::get('/loginForm', action: Login::class)->name('login');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPassword::class)->where('token', '.*') ->name('password.reset');
