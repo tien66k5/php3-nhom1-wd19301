@@ -18,21 +18,19 @@ class ForgotPassword extends Component
     $status = Password::sendResetLink(['email' => $this->email]);
 
     if ($status === Password::RESET_LINK_SENT) {
-       
         $reset = DB::table('password_reset_tokens')->where('email', $this->email)->first();
         if (!$reset) {
             $this->addError('email', 'Không tìm thấy token đặt lại mật khẩu.');
             return;
         }
 
-        $token = urlencode($reset->token); 
-
-
-        return redirect()->to("/reset-password/$token?email={$this->email}");
+       
+        session()->flash('success', 'Chúng tôi đã gửi liên kết đặt lại mật khẩu vào email của bạn!');
     } else {
         $this->addError('email', 'Gửi email thất bại!');
     }
 }
+
 
 
     public function render()

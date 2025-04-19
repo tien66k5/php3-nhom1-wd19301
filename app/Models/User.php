@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Redirect;
 use Filament\Panel;
 use Illuminate\Support\Facades\Auth;
-
+use App\Notifications\CustomResetPassword;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -69,6 +69,9 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
     // app/Models/User.php
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
 
 }

@@ -20,7 +20,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('fullname')
+                Forms\Components\TextInput::make('name')
                     ->label('Họ và tên')
                     ->required(),
 
@@ -52,11 +52,11 @@ class UserResource extends Resource
                     ->password()
                     ->nullable(),
 
-                Forms\Components\Select::make('role')
+                    Forms\Components\Select::make('role')
                     ->label('Vai trò')
                     ->options([
-                        'admin' => 2,
-                        'user' => 1,
+                        2 => 'Quản trị viên',
+                        1 => 'Người dùng',
                     ])
                     ->required(),
 
@@ -79,7 +79,7 @@ class UserResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('fullname')
+                Tables\Columns\TextColumn::make('name')
                     ->label('Họ và Tên')
                     ->sortable()
                     ->searchable(),
@@ -93,15 +93,47 @@ class UserResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ImageColumn::make('avatar')
-                    ->label('Ảnh đại diện'),
-
-                Tables\Columns\TextColumn::make('role')
+                    ->label('Ảnh đại diện')
+                    ->circular(),
+                    Tables\Columns\TextColumn::make('role')
                     ->label('Vai trò')
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(function ($state) {
+                        return match ($state) {
+                            2 => 'Quản trị viên',
+                            1 => 'Người dùng',
 
-                Tables\Columns\TextColumn::make('status')
+                        };
+                    })
+                    ->badge()
+                    ->color(function ($state) {
+                        return match ($state) {
+                            2 => 'danger',
+                            1 => 'primary', 
+            
+                        };
+                    }),
+
+                    Tables\Columns\TextColumn::make('status')
                     ->label('Trạng thái')
-                    ->sortable(),
+                    ->sortable()
+                    ->badge() 
+                    ->formatStateUsing(function ($state) {
+                        return match ($state) {
+                            2 => 'Ngừng hoạt động',
+                            1 => 'Đang hoạt động',
+                            0 => 'Đã bị khóa',
+                        };
+                    })
+                    ->color(function ($state) {
+                        return match ($state) {
+                            2 => 'warning', 
+                            1 => 'success',     
+                            0 => 'danger',      
+
+                        };
+                    }),
+                
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Ngày tạo')

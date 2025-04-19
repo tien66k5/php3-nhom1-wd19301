@@ -27,25 +27,29 @@ class ResetPassword extends Component
             'password' => 'required|min:8|confirmed',
             'token' => 'required'
         ]);
-
+    
+        
         $record = DB::table('password_reset_tokens')
             ->where('email', $this->email)
-            ->where('token', $this->token)
             ->first();
-
-        if (!$record) {
+    
+        
+        if (!$record || !Hash::check($this->token, $record->token)) {
             $this->addError('email', 'Liên kết không hợp lệ hoặc đã hết hạn.');
             return;
         }
+    
 
         $user = User::where('email', $this->email)->first();
         $user->update(['password' => Hash::make($this->password)]);
+    
 
         DB::table('password_reset_tokens')->where('email', $this->email)->delete();
-
+    
         session()->flash('success', 'Mật khẩu đã được cập nhật!');
         return redirect()->route('login');
     }
+    
 
     public function render()
     {
