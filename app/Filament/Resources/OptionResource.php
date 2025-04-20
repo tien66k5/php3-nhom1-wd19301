@@ -26,33 +26,46 @@ class OptionResource extends Resource
 {
     protected static ?string $model = Option::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $pluralLabel = 'Thuộc tính sản phẩm';
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
+{
+    return $form
+        ->schema([
+            Section::make()
+                ->schema([
+                    TextInput::make('name')
+                        ->label('Tên thuộc tính')
+                        ->required()
+                        ->validationMessages([
+                            'required' => 'Vui lòng nhập tên thuộc tính',
+                        ]),
 
+                    Repeater::make('optionValues')
+                        ->label('Giá trị thuộc tính')
+                        ->relationship('optionValues')
+                        ->schema([
+                            TextInput::make('value_name')
+                                ->label('Tên giá trị')
+                                ->required()
+                                ->validationMessages([
+                                    'required' => 'Vui lòng nhập tên giá trị',
+                                ]),
+                        ])
+                        ->deletable()
+                        ->addable()
+                        ->minItems(1) 
+                        ->validationMessages([
+                            'min' => 'Vui lòng thêm ít nhất một giá trị thuộc tính',
+                        ]),
+                ])
+                ->columns(2),
 
-                Section::make()
-                    ->schema([
-                        TextInput::make('name')
-                            ->label('Tên thuộc tính'),
-                        Repeater::make('optionValues')
-                            ->label('Giá trị thuộc tính')
-                            ->relationship('optionValues')
-                            ->schema([
-                                TextInput::make('value_name')
-                                    ->label('Tên giá trị'),
-                            ])
-                            ->deletable()->addable(),
-                    ])
-                    ->columns(2),
-                Toggle::make('status')
-                    ->label('Trạng thái')
-                    ->default(true),
-            ]);
-    }
+            Toggle::make('status')
+                ->label('Trạng thái')
+                ->default(true),
+        ]);
+}
 
     public static function table(Table $table): Table
     {

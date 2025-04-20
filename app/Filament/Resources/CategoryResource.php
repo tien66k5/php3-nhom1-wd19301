@@ -16,27 +16,46 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $pluralLabel = 'Danh mục chính';
     public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form->schema([
-
-            TextInput::make('name')->required(),
-            Toggle::make('status')->default(true),
-
-            Repeater::make('categoryValues')
-                ->relationship('categoryValues')
-                ->label('Danh mục con')
-                ->schema([
-                    TextInput::make('name')->required(),
-                    Toggle::make('status')->default(true),
-                ])
-                ->addActionLabel('Thêm danh mục con'),
+{
+    return $form->schema([
+        TextInput::make('name')
+    ->label('Tên danh mục')
+    ->required()
+    ->rules(['required', 'string', 'min:1'])
+    ->validationMessages([
+        'required' => 'Vui lòng nhập tên danh mục',
+        'min' => 'Tên danh mục không được để trống',
+    ]),
 
 
-        ]);
-    }
+
+        Toggle::make('status')
+            ->label('Trạng thái')
+            ->default(true),
+
+        Repeater::make('categoryValues')
+            ->relationship('categoryValues')
+            ->label('Danh mục con')
+            ->schema([
+                TextInput::make('name')
+                    ->label('Tên danh mục con')
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập tên danh mục con',
+                    ]),
+
+                Toggle::make('status')
+                    ->label('Trạng thái')
+                    ->default(true),
+            ])
+           
+            
+    ]);
+}
+
 
     public static function table(Tables\Table $table): Tables\Table
     {

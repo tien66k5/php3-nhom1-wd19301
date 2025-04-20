@@ -20,27 +20,35 @@ class CategoryValueResource extends Resource
 {
     protected static ?string $model = CategoryValue::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
+    protected static ?string $pluralLabel = 'Danh mục con';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->label('Tên danh mục con'),
+{
+    return $form
+        ->schema([
+            TextInput::make('name')
+                ->required()
+                ->label('Tên danh mục con')
+                ->validationMessages([
+                    'required' => 'Vui lòng nhập tên danh mục con',
+                ]),
 
-                Select::make('category_id')
-                    ->label('Danh mục cha')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->required(),
+            Select::make('category_id')
+                ->label('Danh mục cha')
+                ->relationship('category', 'name')
+                ->searchable()
+                ->required()
+                ->validationMessages([
+                    'required' => 'Vui lòng chọn danh mục cha',
+                ]),
 
-                Toggle::make('status')
-                    ->label('Trạng thái')
-                    ->default(true),
-            ]);
-    }
+            Toggle::make('status')
+                ->label('Trạng thái')
+                ->default(true),
+        ]);
+}
+
 
     public static function table(Table $table): Table
     {

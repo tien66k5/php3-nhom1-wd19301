@@ -23,29 +23,47 @@ class BrandResource extends Resource
 {
     protected static ?string $model = Brand::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
     protected static ?string $pluralLabel = 'Thương hiệu';
 
     public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->label('Tên thương hiệu')
-                    ->required()
-                    ->maxLength(255),
-                FileUpload::make('image')
-                    ->label('Hình ảnh')
-                    ->image()
-                    ->directory('brands'),
-                Toggle::make('status')
-                    ->label('Trạng thái')
-                    ->default(true),
-                Textarea::make('description')
-                    ->label('Mô tả')
-                    ->rows(3),
-            ]);
-    }
+{
+    return $form
+        ->schema([
+            TextInput::make('name')
+                ->label('Tên thương hiệu')
+                ->required()
+                ->maxLength(255)
+                ->validationMessages([
+                    'required' => 'Vui lòng nhập tên thương hiệu',
+                    'max' => 'Tên thương hiệu không được vượt quá 255 ký tự',
+                ]),
+
+            FileUpload::make('image')
+                ->label('Hình ảnh')
+                ->image()
+                ->directory('brands')
+                ->required()
+                ->validationMessages([
+                    'required' => 'Vui lòng chọn hình ảnh cho thương hiệu',
+                    'image' => 'Tệp tải lên phải là hình ảnh',
+                ]),
+
+            Toggle::make('status')
+                ->label('Trạng thái')
+                ->default(true),
+
+            Textarea::make('description')
+                ->label('Mô tả')
+                ->rows(3)
+                ->maxLength(1000)
+                ->validationMessages([
+                    'max' => 'Mô tả không được vượt quá 1000 ký tự',
+                    
+                ]),
+        ]);
+}
+
 
     public static function table(Tables\Table $table): Tables\Table
     {

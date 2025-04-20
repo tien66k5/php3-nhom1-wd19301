@@ -22,53 +22,86 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Họ và tên')
-                    ->required(),
-
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập tên đăng nhập',
+                    ]),
+    
                 Forms\Components\TextInput::make('firstname')
                     ->label('Tên')
-                    ->required(),
-
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập tên',
+                    ]),
+    
                 Forms\Components\TextInput::make('lastname')
                     ->label('Họ')
-                    ->required(),
-
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập họ',
+                    ]),
+    
                 Forms\Components\TextInput::make('email')
                     ->label('Email')
                     ->email()
                     ->required()
-                    ->unique(),
-
+                    ->unique(ignoreRecord: true) // tránh lỗi khi edit
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập email',
+                        'email' => 'Email không đúng định dạng',
+                        'unique' => 'Email đã tồn tại trong hệ thống',
+                    ]),
+    
                 Forms\Components\TextInput::make('phone')
                     ->label('Số điện thoại')
                     ->tel()
-                    ->unique(),
-
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->rule('regex:/^0[0-9]{9}$/')
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập số điện thoại',
+                        'regex' => 'Số điện thoại không đúng định dạng (10 số, bắt đầu bằng 0)',
+                        'unique' => 'Số điện thoại đã tồn tại trong hệ thống',
+                    ]),
+    
                 Forms\Components\FileUpload::make('avatar')
                     ->label('Ảnh đại diện')
                     ->image(),
-
+    
                 Forms\Components\TextInput::make('password')
                     ->label('Mật khẩu')
                     ->password()
-                    ->nullable(),
-
-                    Forms\Components\Select::make('role')
+                    ->nullable()
+                    ->minLength(8)
+                    ->validationMessages([
+                        'min' => 'Mật khẩu phải có ít nhất 8 ký tự',
+                    ]),
+    
+                Forms\Components\Select::make('role')
                     ->label('Vai trò')
                     ->options([
                         2 => 'Quản trị viên',
                         1 => 'Người dùng',
                     ])
-                    ->required(),
-
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng chọn vai trò',
+                    ]),
+    
                 Forms\Components\Select::make('status')
                     ->label('Trạng thái')
                     ->options([
-                        'active' => 1,
-                        'inactive' => 0,
+                        1 => 'Đang hoạt động',
+                        0 => 'Đã bị khóa',
+                        2 => 'Ngừng hoạt động',
                     ])
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng chọn trạng thái',
+                    ]),
             ]);
     }
+    
 
     public static function table(Table $table): Table
     {

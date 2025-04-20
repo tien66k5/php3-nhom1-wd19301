@@ -7,18 +7,20 @@ use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Models\Comment;
 use Filament\Forms;
 use Filament\Forms\Form;
+use App\Models\Product;
+
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Filters\SelectFilter;
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
     protected static ?string $pluralLabel = 'Bình luận đánh giá';
 
     public static function form(Form $form): Form
@@ -38,7 +40,7 @@ class CommentResource extends Resource
                 ->searchable()
                 ->sortable(),
 
-            TextColumn::make('user.name') // Lấy tên người dùng từ comment hoặc rating
+            TextColumn::make('user.name') 
                 ->label('Tên người dùng')
                 ->formatStateUsing(fn ( $state,$record) => 
                     $record->comment ? $record->comment->user->name : 
@@ -89,18 +91,22 @@ class CommentResource extends Resource
                 ->dateTime('d/m/Y H:i')
                 ->sortable(),
         ])
-            ->filters([
-                //
-            ])
+        ->filters([
+            SelectFilter::make('product_id')
+                ->label('Lọc theo sản phẩm')
+                ->options(Product::all()->pluck('name', 'id'))
+                ->searchable()
+        ])
+        
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
+             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ]); 
     }
 
     public static function getRelations(): array
@@ -114,7 +120,7 @@ class CommentResource extends Resource
     {
         return [
             'index' => Pages\ListComments::route('/'),
-            'create' => Pages\CreateComment::route('/create'),
+           'create' => Pages\CreateComment::route('/create'),
             'edit' => Pages\EditComment::route('/{record}/edit'),
         ];
     }
