@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\CategoryValue;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductSku;
 use Illuminate\Http\Request;
 
 class Store extends Component
@@ -20,8 +21,8 @@ class Store extends Component
     public $sortOrder = 'desc'; 
     public $perPage = 9;  
 
-    public $minPrice;
-    public $maxPrice;
+    public $minPrice = 0;
+    public $maxPrice = 100000000;
 
     public $search;  
 
@@ -80,7 +81,7 @@ class Store extends Component
         }
 
         if ($this->minPrice !== null || $this->maxPrice !== null) {
-            $query->whereHas('productSkus', function ($q) {
+            $query->whereHas('productSku', function ($q) {
                 if ($this->minPrice !== null) {
                     $q->where('price', '>=', $this->minPrice);
                 }
