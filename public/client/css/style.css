@@ -3138,3 +3138,12 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   cursor: pointer;
 }
 
+ 
+.description img {
+  max-width: 100%;
+  height: auto !important;
+  width: auto !important;
+  display: block;
+  margin: 10px auto;
+}
+

@@ -61,13 +61,7 @@ class ProductResource extends Resource
                             'required' => 'Vui lòng chọn thương hiệu',
                         ]),
 
-                    Select::make('category_id')
-                        ->label('Phân loại')
-                        ->relationship('category', 'name')
-                        ->required()
-                        ->validationMessages([ 
-                            'required' => 'Vui lòng chọn phân loại',
-                        ]),
+                    
                 ])
                 ->columns(3),
 
