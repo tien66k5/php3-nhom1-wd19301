@@ -14,6 +14,7 @@ class Order extends Model
         'status',
         'total_price',
         'create_at',
+        'addressName',
     ];
 
     public $timestamps = false;

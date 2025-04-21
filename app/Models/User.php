@@ -73,5 +73,10 @@ class User extends Authenticatable implements FilamentUser
     {
         $this->notify(new CustomResetPassword($token));
     }
-
+    public function checkoutAddresses()
+    {
+        return $this->hasMany(CheckoutAddresses::class, 'user_id');
+    }
+    
+    
 }
