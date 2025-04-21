@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category">{{ $product->category->name ?? 'Danh mục' }}</p>
-                                        <h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
+                                        <h3 class="product-name"><a href="/product/{{$product->id}}">{{ $product->name }}</a></h3>
                                         <h4 class="product-price">
                                             {{ number_format($product->defaultSku->price ?? 0, 0, ',', '.') }} VND
 

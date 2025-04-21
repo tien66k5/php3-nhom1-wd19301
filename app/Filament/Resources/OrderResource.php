@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Models\Order;
@@ -7,6 +8,7 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use App\Filament\Resources\OrderResource\Pages;
+use Filament\Tables\Columns\TextColumn;
 
 class OrderResource extends Resource
 {
@@ -29,10 +31,32 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('Mã đơn'),
                 Tables\Columns\TextColumn::make('user.name')->label('Khách hàng'),
-                Tables\Columns\TextColumn::make('address.phone')->label('Số điện thoại'),
-                Tables\Columns\TextColumn::make('address.address')->label('Địa chỉ giao hàng'),
+                Tables\Columns\TextColumn::make('user.phone')->label('Số điện thoại'),
+                Tables\Columns\TextColumn::make('addressName')->label('Địa chỉ giao hàng'),
                 Tables\Columns\TextColumn::make('total_price')->money('VND')->label('Tổng tiền'),
-                Tables\Columns\TextColumn::make('status')->label('Trạng thái'),
+                TextColumn::make('status')
+                    ->label('Trạng thái')
+                    ->formatStateUsing(function (int $state): string {
+                        return match ($state) {
+                            1 => 'Đang xử lý',
+                            2 => 'Chờ thanh toán',
+                            3 => 'Đã thanh toán',
+                            4 => 'Đang vận chuyển',
+                            5 => 'Đã giao',
+                            default => 'Đã hủy',
+                        };
+                    })
+                    ->badge()
+                    ->color(function (int $state): string {
+                        return match ($state) {
+                            1 => 'gray',
+                            2 => 'warning',
+                            3 => 'success',
+                            4 => 'info',
+                            5 => 'primary',
+                            default => 'danger',
+                        };
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i'),
 
                 Tables\Columns\TextColumn::make('product_names')
@@ -50,7 +74,7 @@ class OrderResource extends Resource
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
-            
+
                 Action::make('xem_chi_tiet')
                     ->label('Xem chi tiết')
                     ->icon('heroicon-o-eye')
@@ -60,9 +84,9 @@ class OrderResource extends Resource
                     ->modalContent(function ($record) {
                         $details = $record->details;
                         $orders = Order::with(['user', 'address', 'details.productSku.product'])->get();
-                        return view('filament.resources.order.view', compact('orders')  );
+                        return view('filament.resources.order.view', compact('orders'));
                     }),
-                ]);
+            ]);
     }
 
     public static function getPages(): array

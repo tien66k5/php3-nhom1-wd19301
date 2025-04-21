@@ -22,7 +22,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Forms\Components\Fieldset;
+use App\Models\Category;
+use App\Models\CategoryValue;
 use function Laravel\Prompts\select;
 use App\Models\Brand;
 use Filament\Tables\Columns\IconColumn;
@@ -38,152 +40,177 @@ class ProductResource extends Resource
     protected static ?string $pluralLabel = 'Sản phẩm';
 
     public static function form(Form $form): Form
-{
-    return $form
-        ->schema([
+    {
+        return $form
+            ->schema([
 
-            Section::make()
-                ->schema([
-                    TextInput::make('name')
-                        ->label('Tên sản phẩm')
-                        ->required()
-                        ->unique(ignoreRecord: true)
-                        ->validationMessages([ 
-                            'required' => 'Vui lòng nhập tên sản phẩm',
-                            'unique' => 'Tên sản phẩm đã tồn tại',
-                        ]),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Tên sản phẩm')
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->validationMessages([
+                                'required' => 'Vui lòng nhập tên sản phẩm',
+                                'unique' => 'Tên sản phẩm đã tồn tại',
+                            ]),
 
-                    Select::make('brand_id')
-                        ->label('Thương hiệu')
-                        ->relationship('brand', 'name')
-                        ->required()
-                        ->validationMessages([ 
-                            'required' => 'Vui lòng chọn thương hiệu',
-                        ]),
+                        Select::make('brand_id')
+                            ->label('Thương hiệu')
+                            ->relationship('brand', 'name')
+                            ->required()
+                            ->validationMessages([
+                                'required' => 'Vui lòng chọn thương hiệu',
+                            ]),
 
-                    
-                ])
-                ->columns(3),
+                        Fieldset::make('Danh mục sản phẩm')
+                            ->schema([
+                                // Danh mục cha (chỉ để lọc danh mục con, không lưu)
+                                Select::make('selected_category')
+                                    ->label('Danh mục cha')
+                                    ->options(Category::pluck('name', 'id'))
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(callable $set) => $set('category_values', [])),
 
-            Textarea::make('short_description')
-                ->rows(5)
-                ->label('Mô tả ngắn')
-                ->required()
-                ->validationMessages([ 
-                    'required' => 'Vui lòng nhập mô tả ngắn',
-                ]),
 
-            FileUpload::make('images')
-                ->label('Ảnh sản phẩm')
-                ->required()
-                ->image()
-                ->multiple()
-                ->maxFiles(5)
-                ->panelLayout('grid')
-                ->panelAspectRatio('1:1')
-                ->validationMessages([ 
-                    'required' => 'Vui lòng tải lên ít nhất 1 ảnh sản phẩm',
-                ]),
+                                Select::make('category_values')
+                                    ->label('Phân loại (Danh mục con)')
+                                    ->multiple()
+                                    ->options(function (callable $get) {
+                                        $categoryId = $get('selected_category');
+                                        return $categoryId
+                                            ? CategoryValue::where('category_id', $categoryId)->pluck('name', 'id')
+                                            : [];
+                                    })
+                                    ->relationship('categoryValues', 'name')
+                                    ->preload()
+                                    ->required()
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng chọn ít nhất một phân loại sản phẩm.',
+                                    ]),
+                            ])
+                    ])
+                    ->columns(3),
 
-            RichEditor::make('description')
-                ->label('Mô tả')
-                ->required()
-                ->validationMessages([ 
-                    'required' => 'Vui lòng nhập mô tả chi tiết',
-                ])
-                ->columnSpanFull(),
+                Textarea::make('short_description')
+                    ->rows(5)
+                    ->label('Mô tả ngắn')
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập mô tả ngắn',
+                    ]),
 
-            Repeater::make('productSkus')
-                ->relationship()
-                ->schema([
-                    Section::make()
-                        ->schema([
-                            TextInput::make('sku')
-                                ->label('Mã SKU')
-                                ->required()
-                                ->validationMessages([ 
-                                    'required' => 'Vui lòng nhập mã SKU',
-                                ]),
+                FileUpload::make('images')
+                    ->label('Ảnh sản phẩm')
+                    ->required()
+                    ->image()
+                    ->multiple()
+                    ->maxFiles(5)
+                    ->panelLayout('grid')
+                    ->panelAspectRatio('1:1')
+                    ->validationMessages([
+                        'required' => 'Vui lòng tải lên ít nhất 1 ảnh sản phẩm',
+                    ]),
 
-                            TextInput::make('quantity')
-                                ->numeric()
-                                ->required()
-                                ->minValue(0)
-                                ->label('Số lượng')
-                                ->validationMessages([ 
-                                    'required' => 'Vui lòng nhập số lượng',
-                                    'numeric' => 'Số lượng phải là số',
-                                    'min' => 'Số lượng không được âm',
-                                ]),
+                RichEditor::make('description')
+                    ->label('Mô tả')
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Vui lòng nhập mô tả chi tiết',
+                    ])
+                    ->columnSpanFull(),
 
-                            TextInput::make('price')
-                                ->numeric()
-                                ->required()
-                                ->minValue(0)
-                                ->label('Giá')
-                                ->validationMessages([ 
-                                    'required' => 'Vui lòng nhập giá',
-                                    'numeric' => 'Giá phải là số',
-                                    'min' => 'Giá không được nhỏ hơn 0',
-                                ]),
-                        ])
-                        ->columns(3),
+                Repeater::make('productSku')
+                    ->relationship()
+                    ->schema([
+                        Section::make()
+                            ->schema([
+                                TextInput::make('sku')
+                                    ->label('Mã SKU')
+                                    ->required()
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng nhập mã SKU',
+                                    ]),
 
-                    Repeater::make('skuValues')
-                        ->relationship('skuValues')
-                        ->label('Thuộc tính')
-                        ->schema([
-                            Select::make('option_id')
-                                ->label('Thuộc tính')
-                                ->options(Option::pluck('name', 'id'))
-                                ->reactive()
-                                ->afterStateUpdated(fn(callable $set) => $set('value_id', null))
-                                ->required()
-                                ->searchable()
-                                ->validationMessages([ 
-                                    'required' => 'Vui lòng chọn thuộc tính',
-                                ]),
+                                TextInput::make('quantity')
+                                    ->numeric()
+                                    ->required()
+                                    ->minValue(0)
+                                    ->label('Số lượng')
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng nhập số lượng',
+                                        'numeric' => 'Số lượng phải là số',
+                                        'min' => 'Số lượng không được âm',
+                                    ]),
 
-                            Select::make('value_id')
-                                ->label('Giá trị')
-                                ->required()
-                                ->options(
-                                    fn(callable $get) => $get('option_id') ? OptionValue::where('option_id', $get('option_id'))->pluck('value_name', 'id') : []
-                                )
-                                ->searchable()
-                                ->validationMessages([ 
-                                    'required' => 'Vui lòng chọn giá trị thuộc tính',
-                                ]),
-                        ])
-                        ->columns(3)
-                        ->columnSpanFull(),
+                                TextInput::make('price')
+                                    ->numeric()
+                                    ->required()
+                                    ->minValue(0)
+                                    ->label('Giá')
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng nhập giá',
+                                        'numeric' => 'Giá phải là số',
+                                        'min' => 'Giá không được nhỏ hơn 0',
+                                    ]),
+                            ])
+                            ->columns(3),
 
-                    FileUpload::make('images')
-                        ->label('Hình ảnh')
-                        ->image()
-                        ->required()
-                        ->validationMessages([ 
-                            'required' => 'Vui lòng tải hình ảnh cho biến thể',
-                        ])
-                        ->columnSpanFull(),
+                        Repeater::make('skuValues')
+                            ->relationship('skuValues')
+                            ->label('Thuộc tính')
+                            ->schema([
+                                Select::make('option_id')
+                                    ->label('Thuộc tính')
+                                    ->options(Option::pluck('name', 'id'))
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(callable $set) => $set('value_id', null))
+                                    ->required()
+                                    ->searchable()
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng chọn thuộc tính',
+                                    ]),
 
-                ])
-                ->defaultItems(1)
-                ->addable(true)
-                ->deletable(true)
-                ->label('Biến thể')
-                ->rules(['min:1'])
-                ->validationMessages([ 
-                    'min' => 'Sản phẩm cần có ít nhất 1 biến thể',
-                ])
-                ->columns(2)
-                ->columnSpanFull(),
+                                Select::make('value_id')
+                                    ->label('Giá trị')
+                                    ->required()
+                                    ->options(
+                                        fn(callable $get) => $get('option_id') ? OptionValue::where('option_id', $get('option_id'))->pluck('value_name', 'id') : []
+                                    )
+                                    ->searchable()
+                                    ->validationMessages([
+                                        'required' => 'Vui lòng chọn giá trị thuộc tính',
+                                    ]),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull(),
 
-            Toggle::make('status')
-                ->label('Trạng thái')
-                ->default(true),
-        ]);
-}
+                        FileUpload::make('images')
+                            ->label('Hình ảnh')
+                            ->image()
+                            ->required()
+                            ->validationMessages([
+                                'required' => 'Vui lòng tải hình ảnh cho biến thể',
+                            ])
+                            ->columnSpanFull(),
+
+                    ])
+                    ->defaultItems(1)
+                    ->addable(true)
+                    ->deletable(true)
+                    ->label('Biến thể')
+                    ->rules(['min:1'])
+                    ->validationMessages([
+                        'min' => 'Sản phẩm cần có ít nhất 1 biến thể',
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
+
+                Toggle::make('status')
+                    ->label('Trạng thái')
+                    ->default(true),
+            ]);
+    }
 
 
 
@@ -199,7 +226,7 @@ class ProductResource extends Resource
                 TextColumn::make('brands.name')
                     ->label('Tên thương hiệu'),
                 TextColumn::make('variant')->label('Biến thể')->getStateUsing(fn($record) => ProductSku::where('product_id', $record->id)->count('sku')),
-               IconColumn::make('status')
+                IconColumn::make('status')
                     ->label('Trạng thái')
                     ->boolean()
                     ->sortable(),

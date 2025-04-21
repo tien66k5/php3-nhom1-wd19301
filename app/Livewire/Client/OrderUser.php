@@ -37,7 +37,7 @@ class OrderUser extends Component
         foreach ($orders as $order) {
             foreach ($order->details as $detail) {
             
-                $image = $detail->productSku->product->images ? json_decode($detail->productSku->product->images) : 'default.jpg';
+                $image = $detail->productSku->product->images ? $detail->productSku->product->images : 'default.jpg';
                 $imageName = is_array($image) ? $image[0] : $image;   
     
                 $groupedOrders[$order->id][] = [

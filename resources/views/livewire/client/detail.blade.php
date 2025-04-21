@@ -42,7 +42,7 @@
 
                     <div class="col-md-2  col-md-pull-5">
                         <div id="product-imgs">
-                            @foreach ($image as $img)
+                            @foreach ($images as $img)
                                 <div class="product-preview">
                                     <img src="{{ asset('storage/' . $img) }}" alt="">
 

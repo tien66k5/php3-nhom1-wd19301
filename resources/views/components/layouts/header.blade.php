@@ -49,7 +49,7 @@
         <a href="/config">
             <i class="fa fa-wrench"></i>
             <span>Xây dựng PC</span>
-            <div class="qty">2</div>
+        
         </a>
     </div>
 

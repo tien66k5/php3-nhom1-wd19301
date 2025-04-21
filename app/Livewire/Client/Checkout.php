@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Checkout extends Component
 {
@@ -67,9 +68,6 @@ class Checkout extends Component
         session()->flash('success', 'Đặt hàng thành công!');
         return redirect()->route('home.index');
     }
-
-
-
 
 
     public function render()

@@ -33,25 +33,26 @@
                             <h3 class="title">Thanh Toán</h3>
                         </div>
                         <div class="form-group">
-                            <input   wire:model="form.name" class="input" type="text" name="name">
+                            <input wire:model="form.name" class="input" type="text" name="name">
                         </div>
                         <div class="form-group">
-                            <input  wire:model="form.email" class="input" type="email" name="email" >
+                            <input wire:model="form.email" class="input" type="email" name="email">
                         </div>
                         <div class="form-group">
-                            <input  wire:model="form.phone" class="input" type="phone" name="phone" >
+                            <input wire:model="form.phone" class="input" type="phone" name="phone">
                         </div>
                         <div class="form-group">
                             <select wire:model="address" class="input" name="address">
                                 <option value="">-- Chọn địa chỉ --</option>
                                 @foreach ($user->checkoutAddresses as $address)
                                     <option value="{{ $address->id }}">
-                                        {{$address->address}}, {{  $address->ward_name }}, {{ $address->district_name }}, {{ $address->province_name }}, SĐT: {{ $address->phone }}
+                                        {{$address->address}}, {{  $address->ward_name }}, {{ $address->district_name }},
+                                        {{ $address->province_name }}, SĐT: {{ $address->phone }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="input-checkbox">
                                 <input type="checkbox" id="create-account">
@@ -67,9 +68,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                  
+
                 </div>
 
                 <div class="col-md-5 order-details" myfrom="">
@@ -109,9 +111,30 @@
                             @endif
                         </div>
                     </div>
-                    <form wire:submit.prevent="checkout" id="formCheckout" >
-                        <button class="primary-btn order-submit" >Xác nhận</button>
+                    <div>
+                        <p class="font-semibold mb-2">Hình thức thanh toán</p>
+
+                        <div class="mb-2">
+                            <label class="inline-flex items-center gap-2">
+                                <input type="radio" wire:model="paymentMethod" value="cod" class="accent-blue-600">
+                                <span>Thanh toán khi nhận hàng</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label class="inline-flex items-center gap-2">
+                                <input type="radio" wire:click="checkoutWithVnPay" value="vnpay" class="accent-blue-600">
+                                <span>Thanh toán bằng VNPAY</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <form wire:submit.prevent="checkout" id="formCheckout">
+                        <button class="primary-btn order-submit">Xác nhận</button>
                     </form>
+
+
                 </div>
                 <!-- /Order Details -->
             </div>

@@ -3205,3 +3205,72 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   margin: 10px auto;
 }
 
+/* Style cho checkbox */
+.checkbox-label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-icon {
+  background-color: #4CAF50; /* Màu xanh lá khi chọn */
+}
+
+.checkbox-label .checkbox-icon {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: 2px solid #4CAF50;
+  background-color: white;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Nút xác nhận */
+.button-submit {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.button-submit:hover {
+  background-color: #45a049;
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #4CAF50;
+}
+
+/* Label cho các input */
+.input-label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}

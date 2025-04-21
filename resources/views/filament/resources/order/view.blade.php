@@ -17,7 +17,19 @@
                     <td class="p-3 text-sm font-semibold text-black">{{ $order->id }}</td>
                     <td class="p-3 text-sm text-black">{{ $order->user->name }}</td>
                     <td class="p-3 text-sm text-black">{{ number_format($order->total_price) }} VNĐ</td>
-                    <td class="p-3 text-sm text-black">{{ $order->status }}</td>
+                    <td class="p-3 text-sm text-black">
+                        {{
+                            match($order->status) {
+                                1 => 'Đang xử lý',
+                                2 => 'Chờ thanh toán',
+                                3 => 'Đã thanh toán',
+                                4 => 'Đang vận chuyển',
+                                5 => 'Đã giao',
+                                default => 'Đã hủy',
+                            }
+                        }}
+                    </td>
+                    
                 </tr>
 
                 <!-- Hàng chi tiết -->

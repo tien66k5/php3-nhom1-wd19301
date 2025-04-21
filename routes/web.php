@@ -22,6 +22,7 @@ use App\Livewire\Client\OrderUser;
 use App\Livewire\Client\Config;
 use App\Livewire\Client\Cart;
 use Doctrine\DBAL\Driver\Middleware;
+use App\Http\Controllers\VnpayController;
 
 use function Termwind\render;
 session_start();
