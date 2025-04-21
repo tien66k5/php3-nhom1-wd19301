@@ -16,6 +16,9 @@ class CheckoutAddresses extends Model
         'province_id',
         'district_id',
         'ward_id',
+        'province_name',
+        'district_name',
+        'ward_name',
         'phone',
         'status',
     ];

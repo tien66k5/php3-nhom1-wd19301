@@ -7,6 +7,7 @@ use App\Livewire\Client\Store;
 use App\Livewire\Client\Blank;
 use App\Livewire\Client\Contact;
 use App\Livewire\Client\About;
+use App\Livewire\Client\Address;
 use App\Livewire\Client\Auth;
 use App\Livewire\Client\Google;
 use App\Livewire\Client\ProductDetail;
@@ -41,6 +42,7 @@ Route::get('/loginForm', action: Login::class)->name('login');
 Route::get('/registerForm', Register::class)->name('registerForm.index');
 Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPassword::class)->where('token', '.*') ->name('password.reset');
+Route::get('/address', Address::class)->name('Address.index');
 
 Route::post('/review',ProductDetail::class)->name('review.index');
 
