@@ -132,7 +132,7 @@ class ProductDetail extends Component
 
  
             $order = Order::where('user_id', $userId)
-                ->where('status', 1)
+                ->where('status', 5)
                 ->whereHas('details', function ($query) use ($skuId) {
                     $query->where('order_details.sku_id', $skuId);
                 })

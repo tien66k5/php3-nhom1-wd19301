@@ -153,7 +153,9 @@
                                 <div id="tab1" class="tab-pane fade in active">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {!!$product->description!!}
+                                            <div class="description">
+                                                {!!$product->description!!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

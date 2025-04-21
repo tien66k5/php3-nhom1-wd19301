@@ -82,7 +82,10 @@
                                         <a href="/cart">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Giỏ hàng</span>
-                                            <div class="qty">3</div>
+                                            <div class="qty">
+                                                {{ \App\Models\Cart::where('user_id', Auth::id())->sum('quantity') }}
+                                            </div>
+                                            
                                         </a>
                                     </div>
                                 </div>
