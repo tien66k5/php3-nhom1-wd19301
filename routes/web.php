@@ -35,7 +35,7 @@ Route::get('/product/{id}', ProductDetail::class)->name('product.detail');
 Route::get('/blank', Blank::class)->name('blank.index');
 Route::get('/contact', Contact::class)->name('contact.index');
 Route::get('/about', About::class)->name('about.index');
-Route::get('/store', Store::class)->Middleware('auth')->name('store');
+Route::get('/store', Store::class)->name('store');
 // Route::get('/loginForm', Login::class)->name('loginForm.index');
 Route::get('/productList', Store::class)->name('store.index');
 Route::get('/loginForm', action: Login::class)->name('login');

@@ -93,16 +93,6 @@
                                                 @endforeach
                                             </label>
                                         @endforeach
-                        <!-- product tab content -->
-                        <div class="tab-content">
-                            <!-- tab1  -->
-                            <div id="tab1" class="tab-pane fade in active">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="description">
-                                            {!!$product->description !!}
-
-                                        </div>
                                     </div>
                                 </div>
 
@@ -396,11 +386,11 @@
                                     <h3 class="product-name">
                                         <a href="{{ route('product.detail', $related->id) }}">{{ $related->name }}</a>
                                     </h3>
-                               
-                                 
+
+
 
                                 </div>
-                           
+
                             </div>
                         </div>
                         <!-- /product -->
