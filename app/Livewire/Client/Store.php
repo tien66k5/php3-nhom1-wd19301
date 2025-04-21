@@ -23,7 +23,7 @@ class Store extends Component
     public $minPrice;
     public $maxPrice;
 
-    public $search; // <-- Thêm dòng này
+    public $search;  
 
     protected $casts = [
         'selectedBrandIds' => 'array',
@@ -35,12 +35,12 @@ class Store extends Component
         'selectedCategoryValueIds',
         'minPrice',
         'maxPrice',
-        'search', // <-- Thêm dòng này
+        'search',
     ];
 
     public function mount(Request $request)
     {
-        // Lấy dữ liệu từ URL (ví dụ: ?search=chuot)
+
         $this->search = $request->query('search', '');
     }
 

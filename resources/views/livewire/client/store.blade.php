@@ -161,11 +161,7 @@
                     <!-- /sản phẩm cửa hàng -->
 
                     <!-- bộ lọc phía dưới -->
-                    <div class="store-filter clearfix">
-                        <span class="store-qty">
-                            Hiển thị {{ $products->firstItem() }} - {{ $products->lastItem() }} trong tổng số
-                            {{ $products->total() }} sản phẩm
-                        </span>
+                    @if ($products->total() > 9 && $products->lastPage() > 1)
                         <ul class="store-pagination">
                             @if ($products->onFirstPage())
                                 <li class="disabled"><span><i class="fa fa-angle-left"></i></span></li>
@@ -189,7 +185,8 @@
                                 <li class="disabled"><span><i class="fa fa-angle-right"></i></span></li>
                             @endif
                         </ul>
-                    </div>
+                    @endif
+
 
 
 
