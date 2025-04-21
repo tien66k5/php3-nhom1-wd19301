@@ -12,34 +12,24 @@ use Illuminate\Support\Facades\Auth;
 
 class Checkout extends Component
 {
-    public $provinces = [];
-    public $districts = [];
-    public $wards = [];
 
-    public $selectedProvince = null;
-    public $selectedDistrict = null;
-    public $selectedWard = null;
     public $user;
     public $dataCart;
     public $address;
+    public $fullAddress;
+    public $form = [];
 
     public function mount()
     {
-        $response = Http::withoutVerifying()->get('https://provinces.open-api.vn/api/p/');
-
-        if ($response->successful()) {
-            $this->provinces = $response->json();
-        } else {
-            $this->provinces = [];
-        }
 
         $this->dataCart  = cardModel::where('user_id', Auth::id())->get();
         $this->user  = User::where('id', Auth::id())->first();
     }
 
-    public  function checkout()
+    public function checkout()
     {
         $userId = Auth::id();
+        $user = Auth::user();
 
         $cartItems = cardModel::where('user_id', $userId)->get();
 
@@ -52,9 +42,13 @@ class Checkout extends Component
             return $item->quantity * $item->productSku->price;
         });
 
+        $selectedAddress = $user->checkoutAddresses->firstWhere('id', $this->address);
+
+        $this->fullAddress = trim("{$selectedAddress?->address}, {$selectedAddress?->ward_name}, {$selectedAddress?->district_name}, {$selectedAddress?->province_name}", ', ');
+
         $order = Order::create([
             'user_id' => $userId,
-            'address_id' => $this->address,
+            'addressName' => $this->fullAddress,
             'status' => 1,
             'total_price' => $totalPrice,
         ]);
@@ -74,55 +68,40 @@ class Checkout extends Component
         return redirect()->route('home.index');
     }
 
-    public function updatedSelectedProvince($provinceId)
-    {
-        if (!$provinceId) {
-            $this->districts = [];
-            $this->wards = [];
-            $this->selectedDistrict = null;
-            $this->selectedWard = null;
-            return;
-        }
 
-        $response = Http::withoutVerifying()->get("https://provinces.open-api.vn/api/p/{$provinceId}?depth=2");
 
-        if ($response->successful()) {
-            $data = $response->json();
-            $this->districts = $data['districts'] ?? [];
-        } else {
-            $this->districts = [];
-        }
 
-        $this->wards = [];
-        $this->selectedDistrict = null;
-        $this->selectedWard = null;
-    }
-
-    public function updatedSelectedDistrict($districtId)
-    {
-        if (!$districtId) {
-            $this->wards = [];
-            $this->selectedWard = null;
-            return;
-        }
-
-        $response = Http::withoutVerifying()->get("https://provinces.open-api.vn/api/d/{$districtId}?depth=2");
-
-        if ($response->successful()) {
-            $data = $response->json();
-            $this->wards = $data['wards'] ?? [];
-        } else {
-            $this->wards = [];
-        }
-
-        $this->selectedWard = null;
-    }
 
     public function render()
     {
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-        return view('livewire.client.checkout', ['user' => $this->user, 'dataCart' => $this->dataCart]);
+
+        $user = Auth::user();
+        $selectedAddress = $user->checkoutAddresses->firstWhere('id', $this->address); // $this->address là ID được chọn từ form
+
+        $fullAddress = implode(', ', array_filter([
+            $selectedAddress?->address,
+            $selectedAddress?->ward_name,
+            $selectedAddress?->district_name,
+            $selectedAddress?->province_name,
+            $selectedAddress?->phone,
+
+        ]));
+
+
+
+        $this->form = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+        ];
+
+        return view('livewire.client.checkout', [
+            'user'     => $user,
+            'dataCart' => $this->dataCart,
+            'address' => $fullAddress
+        ]);
     }
 }
