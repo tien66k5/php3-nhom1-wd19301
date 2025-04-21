@@ -29,7 +29,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('Mã đơn'),
                 Tables\Columns\TextColumn::make('user.name')->label('Khách hàng'),
-                Tables\Columns\TextColumn::make('user.phone')->label('Số điện thoại'),
+                Tables\Columns\TextColumn::make('address.phone')->label('Số điện thoại'),
                 Tables\Columns\TextColumn::make('address.address')->label('Địa chỉ giao hàng'),
                 Tables\Columns\TextColumn::make('total_price')->money('VND')->label('Tổng tiền'),
                 Tables\Columns\TextColumn::make('status')->label('Trạng thái'),

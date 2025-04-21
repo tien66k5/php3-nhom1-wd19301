@@ -22,7 +22,7 @@ class ProductDetail extends Component
 {
     public $id;
     public $price;
-    public $rating;  
+    public $rating;
     public $content;
     public $product;
     public $sku;
@@ -31,6 +31,7 @@ class ProductDetail extends Component
     public $images;
     public $sku_id;
     public $quantity = 1;
+    public $relatedProducts;
     public function mount($id)
     {
         $this->id = $id;
@@ -41,8 +42,15 @@ class ProductDetail extends Component
         $this->price = $this->sku->first()->price;
         $this->skuName = $this->sku->first()->sku;
 
+        $this->product = Product::with('ratings')->findOrFail($id);
+        $categoryIds = $this->product->categoryValues->pluck('id'); 
 
- 
+        $this->relatedProducts = Product::whereHas('categoryValues', function ($query) use ($categoryIds) {
+            $query->whereIn('category_Values.id', $categoryIds);
+        })
+            ->where('id', '!=', $id) 
+            ->limit(4) 
+            ->get();
     }
 
     public function updateSku($sku)
@@ -103,41 +111,38 @@ class ProductDetail extends Component
     }
     public function render()
     {
-        return view('livewire.client.detail', ['data' => $this->product, 'sku' => $this->sku, 'image' => $this->images, 'price' => $this->price, 'skuName' => $this->skuName,'ratings' => $this->product->ratings()->where('status', 1)->get(),]);
-        
-
+        return view('livewire.client.detail', ['data' => $this->product, 'sku' => $this->sku, 'image' => $this->images, 'price' => $this->price, 'skuName' => $this->skuName, 'ratings' => $this->product->ratings()->where('status', 1)->get(),]);
     }
 
     public function store()
     {
         $this->validate([
-'rating' => 'required|integer|min:1|max:5',
-    'content' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+            'content' => 'required|string|max:1000',
         ]);
-    
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để đánh giá.');
         }
-    
+
         try {
             $userId = Auth::id();
             $productId = $this->product->id;
-            $skuId = optional($this->product->defaultSku)->id; 
+            $skuId = optional($this->product->defaultSku)->id;
 
-    
-            // ✅ Kiểm tra người dùng đã mua sản phẩm (qua sku_id) và đơn đã giao (status = 1)
+ 
             $order = Order::where('user_id', $userId)
                 ->where('status', 1)
                 ->whereHas('details', function ($query) use ($skuId) {
-                    $query->where('order_details.sku_id', $skuId); 
+                    $query->where('order_details.sku_id', $skuId);
                 })
                 ->first();
-    
+
             if (!$order) {
                 session()->flash('error', 'Bạn cần mua sản phẩm và có đơn hàng đã giao để có thể đánh giá.');
                 return redirect()->back();
             }
-    
+
 
             /*
             $hasRated = Rating::where('user_id', $userId)
@@ -149,8 +154,8 @@ class ProductDetail extends Component
                 return;
             }
             */
-    
-            
+
+
             $rating = Rating::create([
                 'rating' => $this->rating,
                 'user_id' => $userId,
@@ -158,8 +163,8 @@ class ProductDetail extends Component
                 'preview' => $this->content,
                 'status' => 1,
             ]);
-    
-            
+
+
             if (!empty($this->content)) {
                 Comment::create([
                     'content' => $this->content,
@@ -169,17 +174,12 @@ class ProductDetail extends Component
                     'status' => 1,
                 ]);
             }
-    
+
             session()->flash('success', 'Đánh giá của bạn đã được gửi thành công!');
             $this->reset(['rating', 'content']);
-    
         } catch (\Exception $e) {
             Log::error('Lỗi khi lưu đánh giá: ' . $e->getMessage());
             session()->flash('error', 'Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
         }
     }
-    
-    
-
-
 }
