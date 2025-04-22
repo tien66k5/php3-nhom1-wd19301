@@ -1,5 +1,12 @@
 <section class="account">
     <div class="container-fluid">
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
         <div class="row g-0">
             @include('components.side-bar')
             <div class="col-lg-9">
