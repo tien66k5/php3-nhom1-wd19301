@@ -114,48 +114,51 @@
                     <!-- sản phẩm cửa hàng -->
                     <div class="row">
                         @foreach($products as $product)
-                            <div class="col-md-4 col-xs-6">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="{{ $product->image_url ?? 'default.jpg' }}" alt="">
-                                        <div class="product-label">
-                                            @if($product->discount)
-                                                <span class="sale">-{{ $product->discount }}%</span>
-                                            @endif
-                                            <span class="new">MỚI</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">{{ $product->category->name ?? 'Danh mục' }}</p>
-                                        <h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
-                                        <h4 class="product-price">
-                                            {{ number_format($product->defaultSku->price ?? 0, 0, ',', '.') }} VND
+                                                @php
+                                                    $firstSku = $product->productSku->first();
+                                                @endphp
+                                                <div class="col-md-4 col-xs-6">
+                                                    <div class="product">
+                                                        <div class="product-img">
+                                                            <img src="{{ asset('storage/' . $firstSku->images) }}" alt="">
+                                                            <div class="product-label">
+                                                                @if($product->discount > 0)
+                                                                    <span class="sale">-{{ $product->discount }}%</span>
+                                                                @endif
+                                                                <span class="new">MỚI</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-body">
+                                                            {{-- <p class="product-category">{{ $product->category->name ?? 'Danh mục' }}</p> --}}
+                                                            <h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
+                                                            <h4 class="product-price">
+                                                                {{ number_format($product->defaultSku->price ?? 0, 0, ',', '.') }} VND
 
-                                            @if($product->defaultSku && $product->defaultSku->old_price)
-                                                <del class="product-old-price">${{ $product->defaultSku->old_price }}</del>
-                                            @endif
-                                        </h4>
+                                                                @if($product->defaultSku && $product->defaultSku->old_price)
+                                                                    <del class="product-old-price">${{ $product->defaultSku->old_price }}</del>
+                                                                @endif
+                                                            </h4>
 
-                                        <div class="product-rating">
-                                            @for($i = 0; $i < 5; $i++)
-                                                <i class="fa fa-star"></i>
-                                            @endfor
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">thêm vào yêu thích</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">so sánh</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem
-                                                    nhanh</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> thêm vào
-                                            giỏ</button>
-                                    </div>
-                                </div>
-                            </div>
+                                                            {{-- <div class="product-rating">
+                                                                @for($i = 0; $i < 5; $i++)
+                                                                    <i class="fa fa-star"></i>
+                                                                @endfor
+                                                            </div> --}}
+                                                            {{-- <div class="product-btns">
+                                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                                        class="tooltipp">thêm vào yêu thích</span></button>
+                                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                                        class="tooltipp">so sánh</span></button>
+                                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem
+                                                                        nhanh</span></button>
+                                                            </div> --}}
+                                                        </div>
+                                                        <div class="add-to-cart">
+                                                            <a href="{{ route('product.detail', $product->id) }}">
+                                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Xem chi tiết</button>
+                                                            </a>                                                        </div>
+                                                    </div>
+                                                </div>
                         @endforeach
                     </div>
                     <!-- /sản phẩm cửa hàng -->

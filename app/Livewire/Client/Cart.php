@@ -12,6 +12,10 @@ class Cart extends Component
     public function mount()
     {
         $this->data  = cardModel::where('user_id', Auth::id())->get();
+        if ($this->data->isEmpty()) {
+            session()->flash('error', 'Không có sản phẩm nào trong giỏ hàng.');
+            return redirect()->route('store');
+        }
     }
 
     public function render()

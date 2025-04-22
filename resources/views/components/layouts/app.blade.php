@@ -28,21 +28,22 @@
 
     <link rel="stylesheet" href="{{ asset('client/css/MyAccount.css') }}">
 
-      <link rel="stylesheet" href="{{asset('client/css/config.css')}}">  
+    <link rel="stylesheet" href="{{asset('client/css/config.css')}}">
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('client/css/style.css') }}" />
 
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> --}}
+    {{--
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> --}}
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
     @livewireStyles
 
 
-    
-    
+
+
 
 </head>
 
@@ -71,7 +72,31 @@
     <script src="{{ asset('client/js/main.js') }}"></script>
     <script src="https://unpkg.com/livewire@3.6.2/dist/livewire.js"></script>
 
+    <script>
+        setTimeout(function () {
+            var alertBox = document.getElementById('success-alert');
+            if (alertBox) {
+                alertBox.style.transition = "opacity 0.5s ease";
+                alertBox.style.opacity = 0;
+                setTimeout(function () {
+                    alertBox.remove();
+                }, 500); // chờ transition hoàn tất rồi remove
+            }
+        }, 5000);
 
+    </script>
+    <script>
+        setTimeout(function () {
+            var alertBox = document.getElementById('alert-message');
+            if (alertBox) {
+                alertBox.style.transition = "opacity 0.5s ease";
+                alertBox.style.opacity = 0;
+                setTimeout(function () {
+                    alertBox.remove();
+                }, 500);
+            }
+        }, 5000);
+    </script>
     <!-- Nơi để thêm script cho từng trang riêng -->
     @yield('scripts')
     @livewireScripts

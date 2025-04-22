@@ -56,8 +56,8 @@ Route::get('/config',Config::class)->name('config.index');
 
 // Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
-Route::get('/myAccount', UserComponent::class)->name('Account.index');
-Route::get('/Orders', OrderUser::class)->name('Order.index');
+Route::get('/myAccount', UserComponent::class)->middleware('auth')->name('Account.index');
+Route::get('/Orders', OrderUser::class)->middleware('auth')->name('Order.index');
 // Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
 Route::post('/myAccount/edit', [UserComponent::class, 'updateProfile'])->name('Account.update');
 
