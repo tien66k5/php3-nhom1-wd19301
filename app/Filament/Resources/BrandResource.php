@@ -56,6 +56,7 @@ class BrandResource extends Resource
             Textarea::make('description')
                 ->label('Mô tả')
                 ->rows(3)
+                
                 ->maxLength(1000)
                 ->validationMessages([
                     'max' => 'Mô tả không được vượt quá 1000 ký tự',

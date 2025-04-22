@@ -11,8 +11,7 @@ class OrderUser extends Component
     public function cancelOrder($orderId)
     {
         $order = Order::where('user_id', Auth::id())->findOrFail($orderId);
-
-     
+    
         if ($order->status == 1) {
             $order->status = 0; 
             $order->save();

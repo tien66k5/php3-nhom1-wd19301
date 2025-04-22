@@ -187,9 +187,6 @@
                         </ul>
                     @endif
 
-
-
-
                     <!-- /bộ lọc phía dưới -->
                 </div>
                 <!-- /KHU VỰC SẢN PHẨM -->
