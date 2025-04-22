@@ -63,9 +63,11 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <button type="submit" wire:click="deleteOne({{ $item->id }})"
-                                            class="btn btn-danger">X</button>
-                                      
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="if (confirm('Bạn có chắc chắn muốn xóa không?')) { @this.call('deleteOne', {{ $item->id }}) }">
+                                            X
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>

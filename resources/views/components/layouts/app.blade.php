@@ -82,7 +82,7 @@
                     alertBox.remove();
                 }, 500); // chờ transition hoàn tất rồi remove
             }
-        }, 5000);
+        }, 3000);
 
     </script>
     <script>
@@ -95,7 +95,7 @@
                     alertBox.remove();
                 }, 500);
             }
-        }, 5000);
+        }, 3000);
     </script>
     <!-- Nơi để thêm script cho từng trang riêng -->
     @yield('scripts')

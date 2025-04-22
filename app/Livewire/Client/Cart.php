@@ -34,5 +34,9 @@ class Cart extends Component
         cardModel::where('id', $skuId)
             ->where('user_id', Auth::id())
             ->delete();
-    }
+            session()->flash('error', 'Không có sản phẩm nào trong giỏ hàng.');
+
+            return redirect()->route('store.index');
+
+        }
 }

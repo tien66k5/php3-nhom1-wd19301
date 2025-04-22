@@ -1,4 +1,6 @@
-    <div class="account-sidebar">
+<div class="col-lg-3">
+  
+  <div class="account-sidebar">
         <div class="account-sidebar-title">
             <p>Xin Chào, {{ Auth::user()->name }}!</p>
         </div>
