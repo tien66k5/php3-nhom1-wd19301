@@ -8,7 +8,9 @@ use App\Models\Cart as cardModel;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Notifications\CheckoutNotification;
 use Illuminate\Support\Facades\Auth;
+
 
 class Checkout extends Component
 {
@@ -52,7 +54,7 @@ class Checkout extends Component
             'status' => 1,
             'total_price' => $totalPrice,
         ]);
-
+        
         foreach ($cartItems as $item) {
             OrderDetail::create([
                 'order_id' => $order->id,
@@ -61,9 +63,13 @@ class Checkout extends Component
                 'quantity' => $item->quantity,
             ]);
         }
-
+        
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->notify(new CheckoutNotification($order));
+        
         cardModel::where('user_id', $userId)->delete();
-
+        
         session()->flash('success', 'Đặt hàng thành công!');
         return redirect()->route('home.index');
     }

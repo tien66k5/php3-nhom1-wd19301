@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Client;
 
+use App\Notifications\OrderCancelledNotification;
 use Livewire\Component;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
@@ -12,14 +13,17 @@ class OrderUser extends Component
     {
         $order = Order::where('user_id', Auth::id())->findOrFail($orderId);
 
-
         if ($order->status == 1) {
             $order->status = 0;
             $order->save();
-            session()->flash('message', 'Đơn hàng đã được hủy.');
+
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $user->notify(new OrderCancelledNotification($order));
+
+            session()->flash('success', 'Đơn hàng đã được hủy và thông báo đã được gửi qua email.');
         }
     }
-
     public function render()
     {
         /** @var \App\Models\User $user */

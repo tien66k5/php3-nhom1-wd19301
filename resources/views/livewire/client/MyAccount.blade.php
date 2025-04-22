@@ -32,23 +32,27 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="firstname" class="form-label">Tên</label>
-                                    <input type="text" id="firstname" name="firstname" class="form-control form-control-lg"
-                                        value="{{ old('firstname', Auth::user()->firstname) }}">
-                                    @error('firstname')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                @if(Auth::user()->firstname)
+    <div class="form-group">
+        <label for="firstname" class="form-label">Tên</label>
+        <input type="text" id="firstname" name="firstname" class="form-control form-control-lg"
+            value="{{ old('firstname', Auth::user()->firstname) }}">
+        @error('firstname')
+            <div class="text-danger">{{ $message}}</div>
+        @enderror
+    </div>
+@endif
 
+                                @if(Auth::user()->lastname)
                                 <div class="form-group">
                                     <label for="lastname" class="form-label">Họ</label>
                                     <input type="text" id="lastname" name="lastname" class="form-control form-control-lg"
                                         value="{{ old('lastname', Auth::user()->lastname) }}">
                                     @error('lastname')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message}}</div>
                                     @enderror
                                 </div>
+                            @endif
                                 <div class="form-group">
                                     <label for="avatar" class="form-label">Ảnh đại diện</label>
                                     <input type="file" id="avatar" name="avatar" class="form-control form-control-lg">
@@ -60,14 +64,16 @@
 
 
 
+                                @if(Auth::user()->phone)
                                 <div class="form-group">
                                     <label for="phone" class="form-label">Số điện thoại</label>
                                     <input type="text" id="phone" name="phone" class="form-control form-control-lg"
                                         value="{{ old('phone', Auth::user()->phone) }}">
                                     @error('phone')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message}}</div>
                                     @enderror
                                 </div>
+                            @endif
 
                                 <div class="form-group">
                                     <label for="email" class="form-label">Email</label>

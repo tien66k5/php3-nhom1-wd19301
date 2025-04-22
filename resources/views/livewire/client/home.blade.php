@@ -1,8 +1,14 @@
 <div>
 
-
     <div class="section">
         <div class="container">
+            @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
             <div class="row">
                 <!-- tiêu đề section -->
                 <div class="col-md-12">
