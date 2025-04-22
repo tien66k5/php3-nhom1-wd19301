@@ -43,13 +43,13 @@ class ProductDetail extends Component
         $this->skuName = $this->sku->first()->sku;
 
         $this->product = Product::with('ratings')->findOrFail($id);
-        $categoryIds = $this->product->categoryValues->pluck('id'); 
+        $categoryIds = $this->product->categoryValues->pluck('id');
 
         $this->relatedProducts = Product::whereHas('categoryValues', function ($query) use ($categoryIds) {
             $query->whereIn('category_Values.id', $categoryIds);
         })
-            ->where('id', '!=', $id) 
-            ->limit(4) 
+            ->where('id', '!=', $id)
+            ->limit(4)
             ->get();
     }
 
@@ -67,12 +67,14 @@ class ProductDetail extends Component
     public function increaseQuantity()
     {
         $this->quantity++;
+        $this->dispatch('updatedPrice');
     }
 
     public function decreaseQuantity()
     {
         if ($this->quantity > 1) {
             $this->quantity--;
+            $this->dispatch('updatedPrice');
         }
     }
     public function addToCart()
@@ -116,6 +118,7 @@ class ProductDetail extends Component
 
     public function store()
     {
+        $this->dispatch('updatedPrice');
         $this->validate([
             'rating' => 'required|integer|min:1|max:5',
             'content' => 'required|string|max:1000',
@@ -130,7 +133,7 @@ class ProductDetail extends Component
             $productId = $this->product->id;
             $skuId = optional($this->product->defaultSku)->id;
 
- 
+
             $order = Order::where('user_id', $userId)
                 ->where('status', 5)
                 ->whereHas('details', function ($query) use ($skuId) {

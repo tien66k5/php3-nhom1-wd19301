@@ -52,8 +52,7 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <input type="number" class="form-control input-number text-center update-cart"
-                                            data-id="{{$item->productSku->id}}" value="{{$item->quantity}}" min="1" max="100">
+                                        <p>{{$item->quantity}}</p>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">

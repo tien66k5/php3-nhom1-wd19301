@@ -28,112 +28,33 @@
             <div class="container">
                 <!-- row -->
                 <div class="row">
-                    <!-- Product main img -->
+
                     <div class="col-md-5 col-md-push-2">
                         <div id="product-main-img">
 
-                            <div class="product-preview">
-                                {{-- <img src="{{ asset('client/img/product08.png') }}" alt=""> --}}
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /Product main img -->
-
-                    <div class="col-md-2  col-md-pull-5">
-                        <div id="product-imgs">
                             @foreach ($images as $img)
                                 <div class="product-preview">
                                     <img src="{{ asset('storage/' . $img) }}" alt="">
-
-                                    {{-- @dd($img) --}}
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
+
+                    <!-- Product thumb images -->
+                    <div class="col-md-2 col-md-pull-5">
+                        <div id="product-imgs">
+                                                       @foreach ($images as $img)
+                                <div class="product-preview">
+                                    <img src="{{ asset('storage/' . $img) }}" alt="">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- /Product thumb imgs -->
 
                     <!-- Product details -->
-                    <div class="col-md-5">
-                        <div class="product-details">
-                            <h2 class="product-name">{{$product->name . '-' . $skuName}}</h2>
-                            {{-- <div>
-                                đánh giá và bình luận
-                                <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <a class="review-link" href="#">10 Review(s) | Add your review</a>
-                            </div> --}}
-                            <div>
-                                <h3 class="product-price">
-                                    {{ number_format($price)}}
-
-                                    @if($product->discount > 0)
-                                                                    <del class="product-old-price">{{ number_format($price * (1 -
-                                        $product->discount / 100)) }}VNĐ</del>
-                                    @endif
-                                </h3>
-                                <span class="product-available">Còn hàng</span>
-                            </div>
-                            <p>{{$product->short_description}}</p>
-                            <form wire:submit.prevent="addToCart">
-                                <div class="product-options">
-                                    <div class="filter-container">
-                                        @foreach ($product->productSku as $sku)
-                                            <label class="filter-option" for="sku_{{$sku->id}}">
-                                                <input wire:model="sku_id" type="radio" id="sku_{{$sku->id}}" name="variant"
-                                                    value="{{$sku->id}}" wire:click="updateSku({{ $sku->id }})" hidden>
-                                                @foreach ($sku->skuValues as $value)
-                                                    {{ $value->option->name }}: {{ $value->optionValue->value_name }}
-                                                    <br />
-                                                @endforeach
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <div class="add-to-cart">
-                                    <div class="qty-label">
-                                        Số lượng
-                                        <div class="input-number">
-                                            <input type="number" wire:model="quantity" min="1">
-
-                                            <span class="qty-up" wire:click="increaseQuantity">+</span>
-                                            <span class="qty-down" wire:click="decreaseQuantity">-</span>
-                                        </div>
-
-                                    </div>
-
-                                    <button type="submit" class="add-to-cart-btn">
-                                        <i class="fa fa-shopping-cart"></i>Thêm giỏ hàng
-                                    </button>
-                                </div>
-                            </form>
-
-                            {{-- <ul class="product-btns">
-                                <li><a href="#"><i class="fa fa-heart-o"></i>Thêm vào sản phẩm yêu thích</a></li>
-                                <li><a href="#"><i class="fa fa-exchange"></i>Thêm vào so sánh</a></li>
-                            </ul> --}}
-
-                            <ul class="product-links">
-                                <li>Danh mục:</li>
-                                {{-- <li><a href="#">{{$product->categoryValue->}}</a></li> --}}
-                            </ul>
-
-                            {{-- <ul class="product-links">
-                                <li>Chỉa sẻ:</li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                            </ul> --}}
-
-                        </div>
-                    </div>
+                
                     <!-- /Product details -->
 
                     <!-- Product tab -->
@@ -142,8 +63,8 @@
                             <!-- product tab nav -->
                             <ul class="tab-nav">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                                <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                                {{-- <li><a data-toggle="tab" href="#tab2">Details</a></li> --}}
+                                <li><a data-toggle="tab" href="#tab3">Bình luận</a></li>
                             </ul>
                             <!-- /product tab nav -->
 
@@ -340,7 +261,7 @@
             <div class="container">
                 <!-- row -->
                 <div class="row">
-
+{{-- 
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <h3 class="title">Sản phẩm liên quan</h3>
@@ -396,7 +317,7 @@
                             </div>
                         </div>
                         <!-- /product -->
-                    @endforeach
+                    @endforeach --}}
 
 
             <!-- /product -->
@@ -416,6 +337,8 @@
 
 
 </div>
+@script
+
 
 <script>
     $wire.on('updatedPrice', () => {
@@ -626,3 +549,4 @@
 
 
 </script>
+@endscript

@@ -102,4 +102,20 @@
                 <!-- /MAIN HEADER -->
             </header>
             <!-- /HEADER -->
+            <div>
+                @if(session('success'))
+                <div class="alert alert-success" 
+                id="success-alert"
+                style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 999;">
+               {{ session('success') }}
+            </div>@endif
+            
+            @if(session('success') || session('error'))
+            <div 
+                id="alert-message"
+                class="alert {{ session('success') ? 'alert-success' : 'alert-danger' }}" 
+                style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 999;">
+                {{ session('success') ?? session('error') }}
+            </div>
+            @endif
     </header>

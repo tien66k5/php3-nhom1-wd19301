@@ -3,16 +3,16 @@
     <section class="vh-100">
       <div class="container-fluid">
         <div class="row">
-          @if (session('success'))
+          {{-- @if (session('success'))
           <div class="alert alert-success">
               {{ session('success') }}
           </div>
-      @endif
-      @if (session('error'))
+      @endif --}}
+      {{-- @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
     </div>
-@endif
+@endif --}}
 
       
           <div class="col-sm-6 text-black">

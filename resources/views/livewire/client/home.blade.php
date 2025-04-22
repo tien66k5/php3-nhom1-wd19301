@@ -164,50 +164,52 @@
                             <!-- tab -->
                             <div id="tab2" class="tab-pane fade in active">
                                 <div class="products-slick" data-nav="#slick-nav-2">
-                                    @foreach($products as $product)
-                                                                        <!-- sản phẩm -->
-                                                                        <div class="product">
-                                                                            <div class="product-img">
-                                                                                <img src="{{ asset('storage/uploads/' . $product->thumbnail) }}" alt="">
-                                                                                <div class="product-label">
-                                                                                    @if($product->price > 0 && $product->discount > 0)
-                                                                                        <span
-                                                                                            class="sale">-{{ round(($product->discount / $product->price) * 100) }}%</span>
-                                                                                    @endif
-                                                                                    <span class="new">MỚI</span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="product-body">
-                                                                                <p class="product-category">Danh mục</p>
 
-                                                                                <h3 class="product-name">
-                                                                                    <a
-                                                                                        href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a>
-                                                                                </h3>
-                                                                                <h4 class="product-price">
-                                                                                    {{ number_format($product->discount > 0 ? $product->discount : $product->price) }}
-                                                                                    VNĐ
-                                                                                    @if($product->discount > 0)
-                                                                                        <del class="product-old-price">{{ number_format($product->price) }}
-                                                                                            VNĐ</del>
-                                                                                    @endif
-                                                                                </h4>
-                                                                                <div class="product-btns">
-                                                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                                                            class="tooltipp">Thêm vào yêu thích</span></button>
-                                                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                                                            class="tooltipp">So sánh</span></button>
-                                                                                    <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                                                            class="tooltipp">Xem nhanh</span></button>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="add-to-cart">
-                                                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
-                                                                                    giỏ</button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- /sản phẩm -->
-                                    @endforeach
+                                    @foreach($products as $product)
+                                    @php
+                                        $firstSku = $product->productSku->first();
+                                    @endphp
+                                
+                                    <div class="product">
+                                        <div class="product-img">
+                                                <img src="{{ asset('storage/' . $firstSku->images) }}" alt="" width="150">
+                                           
+                                
+                                            <div class="product-label">
+                                                @if($product->price > 0 && $product->discount > 0)
+                                                    <span class="sale">-{{ round(($product->discount / $product->price) * 100) }}%</span> 
+                                                @endif
+                                                <span class="new">Mới</span>
+                                            </div>
+                                        </div>
+                                
+                                        <div class="product-body">
+                                            <h3 class="product-name">
+                                                <a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a>
+                                            </h3>
+                                
+                                            <h4 class="product-price">
+                                                {{ number_format($firstSku->price * (1 - $product->discount / 100)) }} VNĐ
+                                                @if($product->discount > 0)
+                                                <p>
+                                                    <del class="product-old-price">                                                {{ number_format($firstSku->price ?? $product->discount ?? $product->price) }} VNĐ
+                                                    </del></p>
+                                                @endif
+                                            </h4>
+                                
+                                     
+                                           
+                                        </div>
+                                
+                                        <div class="add-to-cart">
+                                            <a href="{{ route('product.detail', $product->id) }}">
+                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Xem chi tiết</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                
+
                                 </div>
                                 <div id="slick-nav-2" class="products-slick-nav"></div>
                             </div>
@@ -231,7 +233,7 @@
             <!-- dòng row -->
             <div class="row">
 
-                <!-- CỘT 1 -->
+                {{-- <!-- CỘT 1 -->
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
                         <h4 class="title">Sản phẩm bán chạy</h4>
@@ -356,7 +358,7 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
+                </div>--}}
 
             </div>
             <!-- /dòng row -->
